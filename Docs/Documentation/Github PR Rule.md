@@ -1,6 +1,6 @@
 # Github PR 작성 규칙
 
-> Github Pull requets를 작성할 때의 규칙.
+> Github Pull requests를 작성할 때의 규칙.
 >
 > PR 작성 양식은 `Docs\Template\PR Template.md`를 참고.
 >
