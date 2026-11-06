@@ -42,6 +42,9 @@
 ### Commit 관련
 - 커밋 메시지 작성 규칙 : `Docs/Documentation/Commit Rule.md`
 
+### Branch 관련
+- 브랜치 이름 작성 규칙 : `Docs/Documentation/Branch Rule.md`
+
 ### 작업일지 작성 시
 - 작업일지 작성은 `work-log` 스킬을 호출해 수행한다. (`.claude\skills\work-log\SKILL.md`)
 
