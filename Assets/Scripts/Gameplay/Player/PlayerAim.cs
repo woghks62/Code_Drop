@@ -27,7 +27,7 @@ public class PlayerAim : MonoBehaviour
     private void SetAim()
     {
         _aimPoint = _aimInput.action.ReadValue<Vector2>();
-        Debug.Log("Aim Point: " + _aimPoint);
+        //Debug.Log("Aim Point: " + _aimPoint);
         _aimTarget.transform.position = _aimPoint;
 
         RaycastHit hit;
