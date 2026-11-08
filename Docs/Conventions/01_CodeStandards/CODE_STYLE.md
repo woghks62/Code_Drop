@@ -61,7 +61,6 @@
 - 주석 작성 규칙은 `COMMENT_GUIDELINES.md`를 따른다.
 
 ### 01-7. null 및 오류 처리
-- 필수 참조가 누락되면 `Debug.LogError(..., this)`로 알리고 해당 기능의 진행을 중단한다.
 - 선택 참조는 null일 경우 안전하게 건너뛸 수 있다.
 - 파괴된 Unity 오브젝트의 null 판정에는 `== null`을 사용한다. `UnityEngine.Object`에 `?.`, `??`를 무조건 적용하지 않는다.
 - `try/catch`는 예외 발생 가능성이 있는 외부 작업(파일 입출력 등)에만 사용한다.
