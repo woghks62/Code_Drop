@@ -1074,6 +1074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2134337693}
   - component: {fileID: 2134337694}
+  - component: {fileID: 2134337696}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1112,6 +1113,19 @@ MonoBehaviour:
   _moveInputAction: {fileID: 5753508252727490423, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _moveSpeed: 5
   _moveInput: {x: 0, y: 0}
+--- !u!114 &2134337696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134337692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b2975953126b78409a5e87a43745a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _currentHealth: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
