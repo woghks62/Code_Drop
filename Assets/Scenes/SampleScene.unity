@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d655a30855d963949bd9c29b39a8ce38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
-  _stats: {fileID: 11400000, guid: c8840cd65d62f93468a4a00f77e40696, type: 2}
+  _stats: {fileID: 11400000, guid: 9453a565fb3db1848a03a796ea1e79ab, type: 2}
   _id: 0
 --- !u!1 &735716985
 GameObject:
@@ -1505,8 +1505,11 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 9053410063224838312, guid: a41e71dfa9d089c45a82c55f5e8fd3c0, type: 3}
   _firePoint: {fileID: 884727972}
   _fireAction: {fileID: 6174639747417621864, guid: ac58428ea15cec046a4edb4228311890, type: 3}
-  _guncapacity: 0
+  _reloadAction: {fileID: -8726203446644166395, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _currentGunName: 
+  _guncapacity: 0
+  _spareMagazine: 0
+  _isReloading: 0
 --- !u!136 &2134337698
 CapsuleCollider:
   m_ObjectHideFlags: 0
