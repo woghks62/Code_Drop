@@ -15,12 +15,19 @@ public class PlayerShooter : MonoBehaviour
     private bool _isShooting;
 
     private float _time;
+    [SerializeField] private bool _isReloading;
     
+    [Header("현재 들고 있는 총")]
+    [SerializeField] private int _id;
     [SerializeField] private string _currentGunName;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _framingInterval;
     [SerializeField] private int _guncapacity; // 현재 탄창
     [SerializeField] private int _spareMagazine;                 // 리로드 가능 횟수
+    [SerializeField] private float _reloadTime;
+    [SerializeField] private float _bulletSpread;
     
-    [SerializeField] private bool _isReloading;
+    
     
     private void OnEnable()
     {
@@ -35,11 +42,11 @@ public class PlayerShooter : MonoBehaviour
         
         if (_isShooting && _guncapacity > 0)
         {
-            if (_currentGunName == "ShotGun" && _time > _gun.Stats.FramingInterval)
+            if (_currentGunName == "ShotGun" && _time > _framingInterval)
             {
                 FireShotGun();
             }
-            else if (_time > _gun.Stats.FramingInterval)
+            else if (_time > _framingInterval)
             {
                 Fire();
             }
@@ -49,10 +56,11 @@ public class PlayerShooter : MonoBehaviour
 
     private void Fire()
     {
-        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _gun.Stats.BulletSpread);
+        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread);
         Vector3 spread = spredDirection + _firePoint.position;
         Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
-        bullet.Damage = _gun.Stats.Damage;
+        bullet.Damage = _damage;
+        Debug.Log(bullet.Damage);
         _guncapacity--;
         _time = 0f;
     }
@@ -61,10 +69,11 @@ public class PlayerShooter : MonoBehaviour
     {
         for (int i = 0; i < SHOTGUN_BULLET_AMOUNT; i++)
         {
-            Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _gun.Stats.BulletSpread * 30);
+            Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread * 30);
             Vector3 spread = spredDirection + _firePoint.position;
             Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
-            bullet.Damage = _gun.Stats.Damage;    
+            bullet.Damage = _damage;    
+            Debug.Log(bullet.Damage);
         }
         _guncapacity--;
         _time = 0f;
@@ -108,7 +117,7 @@ public class PlayerShooter : MonoBehaviour
     {
         Debug.Log("장전 시작");
         _isReloading = true;
-        yield return new WaitForSeconds(_gun.Stats.ReloadTime);
+        yield return new WaitForSeconds(_reloadTime);
         
         _guncapacity = _gun.Stats.Capacity;
         _spareMagazine--;
@@ -138,8 +147,21 @@ public class PlayerShooter : MonoBehaviour
     {
         _gun = GetComponentInChildren<Gun>();
         Debug.Log($"장착한 무기 : {_gun.Stats.Name}");
-        _guncapacity = _gun.Stats.Capacity;
-        _currentGunName = _gun.Stats.Name;
-        _spareMagazine = _gun.Stats.SpareMagazine;
+        ChangeWeapon(_gun);
     }
+
+    public void ChangeWeapon(Gun gun)
+    {
+        _gun = gun;
+        _id = gun.Stats.Id;
+        _currentGunName = gun.Stats.Name;
+        _damage = gun.Stats.Damage;
+        _framingInterval = gun.Stats.FramingInterval;
+        _guncapacity = gun.Stats.Capacity;
+        _spareMagazine = gun.Stats.SpareMagazine;
+        _reloadTime = gun.Stats.ReloadTime;
+        _bulletSpread = gun.Stats.BulletSpread;
+        
+    }
+    
 }
