@@ -10,24 +10,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         _currentHealth = MAX_HEALTH;
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TakeDamage(30);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Heal(15);
-        }
-    }
     
     public void TakeDamage(int damage)
     {
         _currentHealth = _currentHealth - damage < 0 ? 0 : _currentHealth - damage;
-        Debug.Log($"TakeDamage: {_currentHealth}");
+        Debug.Log($"남은 피: {_currentHealth}");
         
         if (_currentHealth <= 0)
         {
@@ -38,7 +25,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void Heal(int amount)
     {
         _currentHealth = _currentHealth + amount > MAX_HEALTH ? MAX_HEALTH : _currentHealth + amount;
-        Debug.Log($"Heal: {_currentHealth}");
+        Debug.Log($"현재 피: {_currentHealth}");
     }
     
     private void Die()

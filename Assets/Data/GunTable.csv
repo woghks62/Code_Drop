@@ -1,0 +1,7 @@
+아이디,이름,데미지,연사 간격,탄창 용량,예비 탄창 수,재장전 시간,탄 퍼짐
+id,Name,Damage,FramingInterval,Capacity,SpareMagazine,ReloadTime,BulletSpread
+int,string,int,float,int,int,float,float
+1,Rifle,30,0.08,30,12,2,2
+2,ShotGun,15,0.5,8,10,3,12
+3,Sniper,150,1.2,5,6,2.5,0.5
+4,Pistol,20,0.15,15,0,1.5,3
