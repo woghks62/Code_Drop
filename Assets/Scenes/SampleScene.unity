@@ -1505,10 +1505,8 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 9053410063224838312, guid: a41e71dfa9d089c45a82c55f5e8fd3c0, type: 3}
   _firePoint: {fileID: 884727972}
   _fireAction: {fileID: 6174639747417621864, guid: ac58428ea15cec046a4edb4228311890, type: 3}
-  _isShooting: 0
   _guncapacity: 0
   _currentGunName: 
-  _shotGunBulletCount: 8
 --- !u!136 &2134337698
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -10,39 +10,48 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private InputActionReference _fireAction;
 
     private Gun _gun;
-    [SerializeField] private bool _isShooting;
+    private bool _isShooting;
 
     private float _time;
     [SerializeField] private int _guncapacity; // 현재 탄창
+    private int _spareMagazine;                 // 리로드 가능 횟수
 
     [SerializeField] private string _currentGunName;
     
-    private void Awake() => CacheComponents();
-    private void OnEnable() => BindInputEvents();
+    private void OnEnable()
+    {
+        CacheComponents();
+        BindInputEvents();    
+    }
     private void Update()
     {
         _time += Time.deltaTime;
-        Debug.Log($"Time : {_time}");
         
         if (_isShooting && _guncapacity > 0)
         {
             if (_currentGunName == "ShotGun" && _time > _gun.Stats.FramingInterval)
             {
-                Debug.Log("shotgun 실행");
-                ShootShotGun();
+                FireShotGun();
             }
             else if (_time > _gun.Stats.FramingInterval)
             {
-                Bullet bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
-                bullet.Damage = _gun.Stats.Damage;
-                _guncapacity--;
-                _time = 0f;
+                Fire();
             }
         }
     }
     private void OnDisable() => UnBindInputEvents();
 
-    private void ShootShotGun()
+    private void Fire()
+    {
+        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _gun.Stats.BulletSpread);
+        Vector3 spread = spredDirection + _firePoint.position;
+        Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
+        bullet.Damage = _gun.Stats.Damage;
+        _guncapacity--;
+        _time = 0f;
+    }
+
+    private void FireShotGun()
     {
         for (int i = 0; i < SHOTGUN_BULLET_AMOUNT; i++)
         {
@@ -94,5 +103,6 @@ public class PlayerShooter : MonoBehaviour
         Debug.Log($"장착한 무기 : {_gun.Stats.Name}");
         _guncapacity = _gun.Stats.Capacity;
         _currentGunName = _gun.Stats.Name;
+        _spareMagazine = _gun.Stats.SpareMagazine;
     }
 }
