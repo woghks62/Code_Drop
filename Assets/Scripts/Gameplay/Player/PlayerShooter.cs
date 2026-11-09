@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,15 +9,18 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private InputActionReference _fireAction;
+    [SerializeField] private InputActionReference _reloadAction;
 
     private Gun _gun;
     private bool _isShooting;
 
     private float _time;
-    [SerializeField] private int _guncapacity; // 현재 탄창
-    private int _spareMagazine;                 // 리로드 가능 횟수
-
+    
     [SerializeField] private string _currentGunName;
+    [SerializeField] private int _guncapacity; // 현재 탄창
+    [SerializeField] private int _spareMagazine;                 // 리로드 가능 횟수
+    
+    [SerializeField] private bool _isReloading;
     
     private void OnEnable()
     {
@@ -26,6 +30,8 @@ public class PlayerShooter : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
+
+        if (_isReloading) return;
         
         if (_isShooting && _guncapacity > 0)
         {
@@ -82,19 +88,50 @@ public class PlayerShooter : MonoBehaviour
     {
         _isShooting = false;
     }
+
+    private void OnReloadButtonDown(InputAction.CallbackContext context)
+    {
+        if (_guncapacity == _gun.Stats.Capacity || _spareMagazine == 0)
+        {
+            return;
+        }
+
+        if (_isReloading)
+        {
+            return;
+        }
+        
+        StartCoroutine(ReloadRoutine());
+    }
+
+    private IEnumerator ReloadRoutine()
+    {
+        Debug.Log("장전 시작");
+        _isReloading = true;
+        yield return new WaitForSeconds(_gun.Stats.ReloadTime);
+        
+        _guncapacity = _gun.Stats.Capacity;
+        _spareMagazine--;
+        Debug.Log("장전 완료");
+        _isReloading = false;
+    }
     
     private void BindInputEvents()
     {
         _fireAction.action.Enable();
+        _reloadAction.action.Enable();
         _fireAction.action.performed += OnMouseLeftButtonDown;
         _fireAction.action.canceled += OnMouseLeftButtonUp;
+        _reloadAction.action.performed += OnReloadButtonDown;
     }
 
     private void UnBindInputEvents()
     {
         _fireAction.action.Disable();
+        _reloadAction.action.Disable();
         _fireAction.action.performed -= OnMouseLeftButtonDown;
         _fireAction.action.canceled -= OnMouseLeftButtonUp;
+        _reloadAction.action.performed -= OnReloadButtonDown;
     }
     
     private void CacheComponents()
