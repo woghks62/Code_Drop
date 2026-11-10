@@ -15,6 +15,8 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void ChangeState(IEnemyState newState)
     {
+        if(_currentState == newState) return;
+        
         _currentState.Exit();
         _currentState = newState;
         _currentState.Enter();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour, IDamageable
@@ -7,18 +8,20 @@ public class EnemyBase : MonoBehaviour, IDamageable
     
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _currentHealth;
-    
+    [SerializeField] private int _movespeed;
     [SerializeField] private bool _isDead;
-
-    private GameObject _target;
+    [SerializeField] private GameObject _target;
+    [SerializeField] private List<Transform> Patroltransfom = new();
+    
+    
     public GameObject Target => _target;
-
+    public bool IsDead => _isDead;
+    public int Movespeed => _movespeed;
+    public List<Transform> PatroltransfomList => Patroltransfom;
     public void SetTarget(GameObject target)
     {
         _target = target;
     }
-    
-    
     public EnemyStateMachine EnemyStateMachine{get; set;}
     public EnemyIdleState EnemyIdleState{get; set;}
     public EnemyPatrolState EnemyPatrolState{get; set;}
@@ -37,6 +40,24 @@ public class EnemyBase : MonoBehaviour, IDamageable
         {
             _isDead = true;
             EnemyStateMachine.ChangeState(EnemyDeadState);    
+        }
+    }
+    
+    public void OnTriggerEnter(Collider other)
+    {
+        if ((_targetMask & (1 << other.gameObject.layer)) !=0)
+        {
+            SetTarget(other.gameObject);
+            EnemyStateMachine.ChangeState(EnemyPatrolState);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if ((_targetMask & (1 << other.gameObject.layer)) !=0)
+        {
+            SetTarget(null);
+            EnemyStateMachine.ChangeState(EnemyPatrolState);
         }
     }
 
