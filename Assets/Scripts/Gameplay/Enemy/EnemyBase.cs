@@ -3,10 +3,20 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
+    [SerializeField] protected LayerMask _targetMask;
+    
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _currentHealth;
     
     [SerializeField] private bool _isDead;
+
+    private GameObject _target;
+    public GameObject Target => _target;
+
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+    }
     
     
     public EnemyStateMachine EnemyStateMachine{get; set;}
@@ -14,32 +24,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public EnemyPatrolState EnemyPatrolState{get; set;}
     public EnemyDeadState EnemyDeadState{get; set;}
 
-    private void Awake()
-    {
-        EnemyStateMachine = GetComponent<EnemyStateMachine>();
-        EnemyIdleState = new EnemyIdleState(this);
-        EnemyPatrolState = new EnemyPatrolState(this);
-        EnemyDeadState = new EnemyDeadState(this);
-        _currentHealth =  _maxHealth;
-    }
+    public void Awake() => CacheComponents();
 
-    private void Start()
-    {
-        EnemyStateMachine.Initialize(EnemyIdleState);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EnemyStateMachine.ChangeState(EnemyPatrolState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            TakeDamage(30);
-        }
-    }
+    private void Start() => EnemyStateMachine.Initialize(EnemyIdleState);
     
     public void TakeDamage(int damage)
     {
@@ -51,5 +38,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
             _isDead = true;
             EnemyStateMachine.ChangeState(EnemyDeadState);    
         }
+    }
+
+    private void CacheComponents()
+    {
+        EnemyStateMachine = GetComponent<EnemyStateMachine>();
+        EnemyIdleState = new EnemyIdleState(this);
+        EnemyPatrolState = new EnemyPatrolState(this);
+        EnemyDeadState = new EnemyDeadState(this);
+        _currentHealth =  _maxHealth;
     }
 }

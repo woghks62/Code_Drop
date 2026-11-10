@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private int _damage;
+    [SerializeField] private LayerMask _targetLayer;
     
     public int Damage { get => _damage; set => _damage = value; }
     
@@ -21,14 +22,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponentInParent<IDamageable>() != null)
+        if (((1 << other.gameObject.layer) & _targetLayer) != 0)
         {
-            Debug.Log($"피격 대상 : {other.gameObject.name}");
-            IDamageable damageable = other.gameObject.GetComponentInParent<IDamageable>();
+            if (other.gameObject.GetComponent<IDamageable>() != null)
+            {
+                Debug.Log($"피격 대상 : {other.gameObject.name}");
+                IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
             
-            damageable.TakeDamage(_damage);
+                damageable.TakeDamage(_damage); 
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
     private void MoveForward()
