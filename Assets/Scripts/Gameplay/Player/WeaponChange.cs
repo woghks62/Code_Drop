@@ -33,8 +33,11 @@ public class WeaponChange : MonoBehaviour
     private void OnChangeWeapon1Button(InputAction.CallbackContext context)
     {
         if(!_isPistol) return;
+        if (_playerShooter.IsReloading)
+        {
+            _playerShooter.StopReloading();
+        }
         
-        _playerShooter.IsChangeing = true;
         _weapon2Capacity = _playerShooter.GunCapacity;
         _weapon2SpareMagazine = _playerShooter.SpareMagazine;
         ChangeWeapon(_gunList[0], _weapon1Capacity, _weapon1SpareMagazine);
@@ -45,7 +48,11 @@ public class WeaponChange : MonoBehaviour
     {
         if(_isPistol) return;
         
-        _playerShooter.IsChangeing = true;
+        if (_playerShooter.IsReloading)
+        {
+            _playerShooter.StopReloading();
+        }
+        
         _weapon1Capacity = _playerShooter.GunCapacity;
         _weapon1SpareMagazine = _playerShooter.SpareMagazine;
         ChangeWeapon(_gunList[1], _weapon2Capacity, _weapon2SpareMagazine);

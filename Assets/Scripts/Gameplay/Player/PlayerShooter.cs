@@ -10,20 +10,7 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private Transform _firePoint;
     [SerializeField] private InputActionReference _fireAction;
     [SerializeField] private InputActionReference _reloadAction;
-
-    private Gun _gun;
-    private bool _isShooting;
-
-    private float _time;
     [SerializeField] private bool _isReloading;
-    public bool IsReloading =>  _isReloading;
-
-    private bool _isChangeing;
-    public bool IsChangeing
-    {
-        get => _isChangeing;
-        set => _isChangeing = value;
-    }
     
     [Header("현재 들고 있는 총")]
     [SerializeField] private int _id;
@@ -34,11 +21,14 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private int _spareMagazine;                 // 리로드 가능 횟수
     [SerializeField] private float _reloadTime;
     [SerializeField] private float _bulletSpread;
+        
+    private Gun _gun;
+    private bool _isShooting;
+    private float _time;
     
     public int GunCapacity  => _guncapacity;
     public int SpareMagazine => _spareMagazine;
-
-    private IEnumerator a;
+    public bool IsReloading =>  _isReloading;
     
     private void OnEnable()
     {
@@ -48,14 +38,6 @@ public class PlayerShooter : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
-
-        if (_isReloading && _isChangeing)
-        {
-            Debug.Log("재장전 멈춤");
-            StopCoroutine("ReloadRoutine");
-            _isReloading = false;
-            _isChangeing = false;
-        }
         
         if (_isReloading) return;
         
@@ -72,6 +54,13 @@ public class PlayerShooter : MonoBehaviour
         }
     }
     private void OnDisable() => UnBindInputEvents();
+
+    public void StopReloading()
+    {
+        Debug.Log("재장전 멈춤");
+        StopCoroutine("ReloadRoutine");
+        _isReloading = false;
+    }
 
     public void SetCahngeWaeponData(Gun gun, int capacity, int spareMagazine)
     {
@@ -92,7 +81,7 @@ public class PlayerShooter : MonoBehaviour
         Vector3 spread = spredDirection + _firePoint.position;
         Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
         bullet.Damage = _damage;
-        Debug.Log(bullet.Damage);
+        //Debug.Log(bullet.Damage);
         _guncapacity--;
         _time = 0f;
     }
@@ -105,7 +94,7 @@ public class PlayerShooter : MonoBehaviour
             Vector3 spread = spredDirection + _firePoint.position;
             Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
             bullet.Damage = _damage;    
-            Debug.Log(bullet.Damage);
+            //Debug.Log(bullet.Damage);
         }
         _guncapacity--;
         _time = 0f;
