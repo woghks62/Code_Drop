@@ -16,6 +16,14 @@ public class PlayerShooter : MonoBehaviour
 
     private float _time;
     [SerializeField] private bool _isReloading;
+    public bool IsReloading =>  _isReloading;
+
+    private bool _isChangeing;
+    public bool IsChangeing
+    {
+        get => _isChangeing;
+        set => _isChangeing = value;
+    }
     
     [Header("현재 들고 있는 총")]
     [SerializeField] private int _id;
@@ -27,17 +35,28 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float _reloadTime;
     [SerializeField] private float _bulletSpread;
     
-    
+    public int GunCapacity  => _guncapacity;
+    public int SpareMagazine => _spareMagazine;
+
+    private IEnumerator a;
     
     private void OnEnable()
     {
         CacheComponents();
-        BindInputEvents();    
+        BindInputEvents();
     }
     private void Update()
     {
         _time += Time.deltaTime;
 
+        if (_isReloading && _isChangeing)
+        {
+            Debug.Log("재장전 멈춤");
+            StopCoroutine("ReloadRoutine");
+            _isReloading = false;
+            _isChangeing = false;
+        }
+        
         if (_isReloading) return;
         
         if (_isShooting && _guncapacity > 0)
@@ -54,6 +73,19 @@ public class PlayerShooter : MonoBehaviour
     }
     private void OnDisable() => UnBindInputEvents();
 
+    public void SetCahngeWaeponData(Gun gun, int capacity, int spareMagazine)
+    {
+        _gun = gun;
+        _id = gun.Stats.Id;
+        _currentGunName = gun.Stats.Name;
+        _damage = gun.Stats.Damage;
+        _framingInterval = gun.Stats.FramingInterval;
+        _guncapacity = capacity;
+        _spareMagazine = spareMagazine;
+        _reloadTime = gun.Stats.ReloadTime;
+        _bulletSpread = gun.Stats.BulletSpread;
+    }
+    
     private void Fire()
     {
         Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread);
@@ -109,8 +141,7 @@ public class PlayerShooter : MonoBehaviour
         {
             return;
         }
-        
-        StartCoroutine(ReloadRoutine());
+        StartCoroutine("ReloadRoutine");
     }
 
     private IEnumerator ReloadRoutine()
@@ -147,21 +178,6 @@ public class PlayerShooter : MonoBehaviour
     {
         _gun = GetComponentInChildren<Gun>();
         Debug.Log($"장착한 무기 : {_gun.Stats.Name}");
-        ChangeWeapon(_gun);
-    }
-
-    public void ChangeWeapon(Gun gun)
-    {
-        _gun = gun;
-        _id = gun.Stats.Id;
-        _currentGunName = gun.Stats.Name;
-        _damage = gun.Stats.Damage;
-        _framingInterval = gun.Stats.FramingInterval;
-        _guncapacity = gun.Stats.Capacity;
-        _spareMagazine = gun.Stats.SpareMagazine;
-        _reloadTime = gun.Stats.ReloadTime;
-        _bulletSpread = gun.Stats.BulletSpread;
-        
     }
     
 }

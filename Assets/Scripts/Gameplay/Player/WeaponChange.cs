@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,35 +12,55 @@ public class WeaponChange : MonoBehaviour
     
     [SerializeField] private PlayerShooter _playerShooter;
 
+    private int _weapon1Capacity;
+    private int _weapon1SpareMagazine;
+    
+    private int _weapon2Capacity;
+    private int _weapon2SpareMagazine;
 
-    private void OnEnable()
-    {
-        BindInputEvents();
-    }
+    [SerializeField] private bool _isPistol;
 
-    private void OnDisable()
+    private void Awake()
     {
-        UnBindInputEvents();
+        CacheComponents();
+        InitWeapon();
     }
+    private void OnEnable() => BindInputEvents();
+    private void OnDisable() => UnBindInputEvents();
+
+    private int tmp;
 
     private void OnChangeWeapon1Button(InputAction.CallbackContext context)
     {
-        _playerShooter.ChangeWeapon(_gunList[0]);
+        if(!_isPistol) return;
+        
+        _playerShooter.IsChangeing = true;
+        _weapon2Capacity = _playerShooter.GunCapacity;
+        _weapon2SpareMagazine = _playerShooter.SpareMagazine;
+        ChangeWeapon(_gunList[0], _weapon1Capacity, _weapon1SpareMagazine);
+        _isPistol =  false;
     }
 
     private void OnChangeWeapon2Button(InputAction.CallbackContext context)
     {
-        _playerShooter.ChangeWeapon(_gunList[1]);
+        if(_isPistol) return;
+        
+        _playerShooter.IsChangeing = true;
+        _weapon1Capacity = _playerShooter.GunCapacity;
+        _weapon1SpareMagazine = _playerShooter.SpareMagazine;
+        ChangeWeapon(_gunList[1], _weapon2Capacity, _weapon2SpareMagazine);
+        _isPistol =  true;
     }
 
-    public void Save()
+    private void InitWeapon()
     {
-        
+        _playerShooter.SetCahngeWaeponData(_gunList[1], _weapon2Capacity, _weapon2SpareMagazine);
+        _isPistol = true;
     }
 
-    public void Load()
+    public void ChangeWeapon(Gun gun, int capacity, int spareMagazine)
     {
-        
+        _playerShooter.SetCahngeWaeponData(gun, capacity, spareMagazine);
     }
     
     private void BindInputEvents()
@@ -60,6 +81,10 @@ public class WeaponChange : MonoBehaviour
 
     private void CacheComponents()
     {
+        _weapon1Capacity = _gunList[0].Stats.Capacity;
+        _weapon1SpareMagazine = _gunList[0].Stats.SpareMagazine;
         
+        _weapon2Capacity = _gunList[1].Stats.Capacity;
+        _weapon2SpareMagazine = _gunList[1].Stats.SpareMagazine;
     }
 }
