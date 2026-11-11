@@ -3194,7 +3194,7 @@ GameObject:
   - component: {fileID: 1692669725}
   - component: {fileID: 1692669724}
   m_Layer: 0
-  m_Name: GunTableParser
+  m_Name: TableParser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3218,6 +3218,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8840cd65d62f93468a4a00f77e40696, type: 2}
   - {fileID: 11400000, guid: fc15ffbbcdd5ea045a9a903fa856ef1a, type: 2}
   - {fileID: 11400000, guid: 9453a565fb3db1848a03a796ea1e79ab, type: 2}
+  _enemyDataFile: {fileID: 4900000, guid: 5164f4a639499a443bf234726fb9d07f, type: 3}
+  _enemyStatsList:
+  - {fileID: 11400000, guid: 3fd104b3ee564b74b975b938eb14dfde, type: 2}
+  - {fileID: 11400000, guid: 7f9d5a556ab94c8478ac72ee7169912b, type: 2}
 --- !u!4 &1692669725
 Transform:
   m_ObjectHideFlags: 0
