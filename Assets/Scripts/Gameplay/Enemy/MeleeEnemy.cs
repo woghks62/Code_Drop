@@ -12,7 +12,26 @@ public class MeleeEnemy : EnemyBase
     [SerializeField] private float radius;
     
     bool _isCollision = false;
+
+    [SerializeField] private MeleeKnife _meleeKnife;
+    public MeleeKnife MeleeKnife => _meleeKnife;
     
+    public void Attack()
+    {
+        // 애니메이션 Event (애니메이션 시작할 때 실행)
+        Debug.Log("공격 애니메이션 재생");
+        IsAttack = true;
+        MeleeKnife.Attack();
+    }
+
+    public void AttackFinish()
+    {
+        // 애니메이션 Event (애니메이션 끝날때 실행)
+        Debug.Log("공격 애니메이션 종료");
+        IsAttack = false;
+        MeleeKnife.Finish();
+    }
+
     private void Awake()
     {
         base.Awake();
@@ -34,7 +53,8 @@ public class MeleeEnemy : EnemyBase
             }
             else
             {
-                CheckPlayer();    
+                CheckPlayer();
+                IsAttack = false;
             }
         }
         

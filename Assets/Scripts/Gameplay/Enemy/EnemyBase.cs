@@ -22,6 +22,15 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         _target = target;
     }
+    
+    [SerializeField] private bool _isAttack;
+
+    public bool IsAttack
+    {
+        get => _isAttack;
+        set => _isAttack = value;
+    }
+    
     public EnemyStateMachine EnemyStateMachine{get; set;}
     public EnemyIdleState EnemyIdleState{get; set;}
     public EnemyPatrolState EnemyPatrolState{get; set;}
@@ -45,6 +54,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     
     public void OnTriggerEnter(Collider other)
     {
+        if(IsAttack) return;
+        
         if ((_targetMask & (1 << other.gameObject.layer)) !=0)
         {
             SetTarget(other.gameObject);

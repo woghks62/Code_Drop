@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MeleeAttackState : IEnemyState
 {
-    private EnemyBase _enemyBase;
-
-    public MeleeAttackState(EnemyBase enemyBase)
+    private MeleeEnemy _meleeEnemy;
+    
+    public MeleeAttackState(MeleeEnemy meleeEnemy)
     {
-        _enemyBase = enemyBase;
+        _meleeEnemy = meleeEnemy;
     }
     
     public void Enter()
@@ -16,7 +16,22 @@ public class MeleeAttackState : IEnemyState
 
     public void Execute()
     {
+        // 테스트
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            _meleeEnemy.Attack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            _meleeEnemy.AttackFinish();
+        }
+        
+        if (_meleeEnemy.IsAttack) return;
+        
+        // 공격 애니메이션 실행
         Debug.Log("Attack 실행중");
+        Debug.Log("공격 애니메이션 진행 중");
     }
 
     public void Exit()
