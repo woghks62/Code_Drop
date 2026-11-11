@@ -1,19 +1,14 @@
 using System;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEditor;  // OnDrawGizmos
 
 public class MeleeEnemy : EnemyBase
 {
+    [Header("Enemy 무기 관련")]
+    [SerializeField] private MeleeKnife _meleeKnife;
+    
     public MeleeAttackState MeleeAttackState{get; set;}
     public MeleeChaseState MeleeChaseState{get; set;}
-    
-    [SerializeField] private float angleRange;
-    [SerializeField] private float radius;
-    
-    bool _isCollision = false;
-
-    [SerializeField] private MeleeKnife _meleeKnife;
     public MeleeKnife MeleeKnife => _meleeKnife;
     
     public void Attack()
@@ -32,10 +27,10 @@ public class MeleeEnemy : EnemyBase
         MeleeKnife.Finish();
     }
 
-    private void OnEnable()
+    public override void Start()
     {
-        base.OnEnable();
-        CacheComponents();
+        base.Start();
+        MeleeCacheComponents();
     }
 
     private void Update()
@@ -47,7 +42,7 @@ public class MeleeEnemy : EnemyBase
 
         if (Target != null)
         {
-            if ((Target.transform.position - transform.position).magnitude < 2)
+            if ((Target.transform.position - transform.position).magnitude < AttackRange)
             {
                 EnemyStateMachine.ChangeState(MeleeAttackState);
             }
@@ -70,14 +65,14 @@ public class MeleeEnemy : EnemyBase
         }
         if (Target == null)
         {
-            _isCollision = false;
+            SeeTarget = false;
             return;
         }
         
         Vector3 interV = Target.gameObject.transform.position - transform.position;
 
         // target과 나 사이의 거리가 radius 보다 작다면
-        if (interV.magnitude <= radius)
+        if (interV.magnitude <= Radius)
         {
             // '타겟-나 벡터'와 '내 정면 벡터'를 내적
             float dot = Vector3.Dot(interV.normalized, transform.forward);
@@ -87,42 +82,31 @@ public class MeleeEnemy : EnemyBase
             float degree = Mathf.Rad2Deg * theta;
 
             // 시야각 판별
-            if (degree <= angleRange / 2f)
+            if (degree <= AngleRange / 2f)
             {
-                _isCollision = true;
+                SeeTarget = true;
                 EnemyStateMachine.ChangeState(MeleeChaseState);
             }
             else
             {
-                _isCollision = false;
+                SeeTarget = false;
                 EnemyStateMachine.ChangeState(EnemyPatrolState);
 
             }
         }
         else
         {
-            _isCollision = false;
+            SeeTarget = false;
             EnemyStateMachine.ChangeState(EnemyPatrolState);
         }
     }
     
     // ----------------------------------- 초기화
     
-    private void CacheComponents()
+    private void MeleeCacheComponents()
     {
         MeleeChaseState =  new MeleeChaseState(this);
         MeleeAttackState = new MeleeAttackState(this);
     }
-    
-    // ------------------------------------ 에디터 확인용
-    
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
-    private void OnDrawGizmos()
-    {
-        Handles.color = _isCollision ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
+
 }

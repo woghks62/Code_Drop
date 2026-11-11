@@ -1,24 +1,20 @@
 using UnityEngine;
-using UnityEditor;  // OnDrawGizmos
 
 public class RangeEnemy : EnemyBase
 {
+    [Header("Enemy 무기 관련")]
     [SerializeField] private Bullet _enemyBullet;
     [SerializeField] private Transform _firePoint;
-
+    
+    private float _time;
+    
     public RangeChaseState RangeChaseState;
     public RangeAttackState RangeAttackState;
     
-    //[SerializeField] private float angleRange;
-    //[SerializeField] private float radius;
-    
-    private float _time;
-    //[SerializeField] private float _framingInterval;
-
-    private void OnEnable()
+    public override void Start()
     {
-        base.OnEnable();
-        CacheComponents();
+        base.Start();
+        RangeCacheComponents();
     }
 
     private void Update()
@@ -31,7 +27,7 @@ public class RangeEnemy : EnemyBase
 
         if (Target != null)
         {
-            if ((Target.transform.position - transform.position).magnitude < 10 && SeeTarget)
+            if ((Target.transform.position - transform.position).magnitude < AttackRange && SeeTarget)
             {
                 EnemyStateMachine.ChangeState(RangeAttackState);
             }
@@ -48,7 +44,7 @@ public class RangeEnemy : EnemyBase
     public void Shoot()
     {
         transform.LookAt(Target.transform);
-        if (_time < _enemy.EnemyStats.FramingInterval)
+        if (_time < FramingInterval)
         {
             return;
         }
@@ -83,7 +79,7 @@ public class RangeEnemy : EnemyBase
         Vector3 interV = Target.gameObject.transform.position - transform.position;
 
         // target과 나 사이의 거리가 radius 보다 작다면
-        if (interV.magnitude <= _enemy.EnemyStats.Radius)
+        if (interV.magnitude <= Radius)
         {
             // '타겟-나 벡터'와 '내 정면 벡터'를 내적
             float dot = Vector3.Dot(interV.normalized, transform.forward);
@@ -93,7 +89,7 @@ public class RangeEnemy : EnemyBase
             float degree = Mathf.Rad2Deg * theta;
 
             // 시야각 판별
-            if (degree <= _enemy.EnemyStats.AngleRange / 2f)
+            if (degree <= AngleRange / 2f)
             {
                 SeeTarget = true;
                 EnemyStateMachine.ChangeState(RangeChaseState);
@@ -114,22 +110,10 @@ public class RangeEnemy : EnemyBase
     
     // ----------------------------------- 초기화
     
-    private void CacheComponents()
+    private void RangeCacheComponents()
     {
         RangeChaseState = new RangeChaseState(this);
         RangeAttackState = new RangeAttackState(this);
     }
     
-    // ------------------------------------ 에디터 확인용
-    [SerializeField] bool _isCollision = false;
-    
-     Color _blue = new Color(0f, 0f, 1f, 0.2f);
-     Color _red = new Color(1f, 0f, 0f, 0.2f);
-     private void OnDrawGizmos()
-     {
-         Handles.color = SeeTarget ? _red : _blue;
-         // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, _enemy.EnemyStats.AngleRange / 2, _enemy.EnemyStats.Radius);
-         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -_enemy.EnemyStats.AngleRange / 2, _enemy.EnemyStats.Radius);
-     }
 }
