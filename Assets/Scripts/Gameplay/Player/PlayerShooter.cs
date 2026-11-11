@@ -7,6 +7,7 @@ public class PlayerShooter : MonoBehaviour
     private const int SHOTGUN_BULLET_AMOUNT = 10;
     
     [SerializeField] private Bullet _bulletPrefab;
+    [SerializeField] private SniperBullet _sniperbulletPrefab;
     [SerializeField] private Transform _firePoint;
     [SerializeField] private InputActionReference _fireAction;
     [SerializeField] private InputActionReference _reloadAction;
@@ -46,6 +47,10 @@ public class PlayerShooter : MonoBehaviour
             if (_currentGunName == "ShotGun" && _time > _framingInterval)
             {
                 FireShotGun();
+            }
+            else if (_currentGunName == "Sniper" && _time > _framingInterval)
+            {
+                FireSniper();
             }
             else if (_time > _framingInterval)
             {
@@ -96,6 +101,17 @@ public class PlayerShooter : MonoBehaviour
             bullet.Damage = _damage;    
             //Debug.Log(bullet.Damage);
         }
+        _guncapacity--;
+        _time = 0f;
+    }
+
+    private void FireSniper()
+    {
+        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread);
+        Vector3 spread = spredDirection + _firePoint.position;
+        Bullet bullet = Instantiate(_sniperbulletPrefab, spread, _firePoint.rotation);
+        bullet.Damage = _damage;
+        //Debug.Log(bullet.Damage);
         _guncapacity--;
         _time = 0f;
     }
