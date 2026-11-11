@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private int _damage;
     [SerializeField] private LayerMask _targetLayer;
+    public LayerMask TargetLayer => _targetLayer;
     
     public int Damage { get => _damage; set => _damage = value; }
     
