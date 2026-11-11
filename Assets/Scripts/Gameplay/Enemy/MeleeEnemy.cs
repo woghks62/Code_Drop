@@ -32,9 +32,9 @@ public class MeleeEnemy : EnemyBase
         MeleeKnife.Finish();
     }
 
-    private void Awake()
+    private void OnEnable()
     {
-        base.Awake();
+        base.OnEnable();
         CacheComponents();
     }
 

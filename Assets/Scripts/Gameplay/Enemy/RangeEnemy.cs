@@ -5,19 +5,19 @@ public class RangeEnemy : EnemyBase
 {
     [SerializeField] private Bullet _enemyBullet;
     [SerializeField] private Transform _firePoint;
+
+    public RangeChaseState RangeChaseState;
+    public RangeAttackState RangeAttackState;
     
-    public RangeChaseState RangeChaseState{get; set;}
-    public RangeAttackState RangeAttackState{get; set;}
-    
-    [SerializeField] private float angleRange;
-    [SerializeField] private float radius;
+    //[SerializeField] private float angleRange;
+    //[SerializeField] private float radius;
     
     private float _time;
-    [SerializeField] private float _framingInterval;
+    //[SerializeField] private float _framingInterval;
 
-    private void Awake()
+    private void OnEnable()
     {
-        base.Awake();
+        base.OnEnable();
         CacheComponents();
     }
 
@@ -48,7 +48,7 @@ public class RangeEnemy : EnemyBase
     public void Shoot()
     {
         transform.LookAt(Target.transform);
-        if (_time < _framingInterval)
+        if (_time < _enemy.EnemyStats.FramingInterval)
         {
             return;
         }
@@ -83,7 +83,7 @@ public class RangeEnemy : EnemyBase
         Vector3 interV = Target.gameObject.transform.position - transform.position;
 
         // target과 나 사이의 거리가 radius 보다 작다면
-        if (interV.magnitude <= radius)
+        if (interV.magnitude <= _enemy.EnemyStats.Radius)
         {
             // '타겟-나 벡터'와 '내 정면 벡터'를 내적
             float dot = Vector3.Dot(interV.normalized, transform.forward);
@@ -93,7 +93,7 @@ public class RangeEnemy : EnemyBase
             float degree = Mathf.Rad2Deg * theta;
 
             // 시야각 판별
-            if (degree <= angleRange / 2f)
+            if (degree <= _enemy.EnemyStats.AngleRange / 2f)
             {
                 SeeTarget = true;
                 EnemyStateMachine.ChangeState(RangeChaseState);
@@ -121,15 +121,15 @@ public class RangeEnemy : EnemyBase
     }
     
     // ------------------------------------ 에디터 확인용
-    //[SerializeField] bool _isCollision = false;
+    [SerializeField] bool _isCollision = false;
     
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
-    private void OnDrawGizmos()
-    {
-        Handles.color = SeeTarget ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, angleRange / 2, radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -angleRange / 2, radius);
-    }
+     Color _blue = new Color(0f, 0f, 1f, 0.2f);
+     Color _red = new Color(1f, 0f, 0f, 0.2f);
+     private void OnDrawGizmos()
+     {
+         Handles.color = SeeTarget ? _red : _blue;
+         // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
+         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, _enemy.EnemyStats.AngleRange / 2, _enemy.EnemyStats.Radius);
+         Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -_enemy.EnemyStats.AngleRange / 2, _enemy.EnemyStats.Radius);
+     }
 }

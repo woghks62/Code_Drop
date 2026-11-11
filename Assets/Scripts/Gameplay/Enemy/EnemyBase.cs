@@ -6,17 +6,43 @@ public class EnemyBase : MonoBehaviour, IDamageable
 {
     [SerializeField] protected LayerMask _targetMask;
     
-    [SerializeField] private int _maxHealth;
     [SerializeField] private int _currentHealth;
-    [SerializeField] private int _movespeed;
+    //[SerializeField] private int _movespeed;
     [SerializeField] private bool _isDead;
     [SerializeField] private GameObject _target;
     [SerializeField] private List<Transform> Patroltransfom = new();
+
+    [SerializeField] protected Enemy _enemy = new();
+
+    [Header("현재 EnemyStats")]
+    [SerializeField] private int _id;
+    [SerializeField] private string _name;
+    [SerializeField] private int _maxHealth;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private int _angleRange;
+    [SerializeField] private float _radius;
+    [SerializeField] private float _framingInterval;
+    [SerializeField] private int _damage;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private float _projectileSpeed;
     
+    private void tmp()
+    {
+        _id = _enemy.EnemyStats.Id;
+        _name = _enemy.EnemyStats.Name;
+        _maxHealth = _enemy.EnemyStats.MaxHealth;
+        _moveSpeed = _enemy.EnemyStats.MoveSpeed;
+        _angleRange = _enemy.EnemyStats.AngleRange;
+        _radius = _enemy.EnemyStats.Radius;
+        _framingInterval = _enemy.EnemyStats.FramingInterval;
+        _damage = _enemy.EnemyStats.Damage;
+        _attackRange = _enemy.EnemyStats.AttackRange;
+        _projectileSpeed = _enemy.EnemyStats.ProjectileSpeed;
+    }
     
     public GameObject Target => _target;
     public bool IsDead => _isDead;
-    public int Movespeed => _movespeed;
+    public float Movespeed => _moveSpeed;
     public List<Transform> PatroltransfomList => Patroltransfom;
     public void SetTarget(GameObject target)
     {
@@ -38,8 +64,12 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     [SerializeField] private bool _seeTarget;
     public bool SeeTarget { get => _seeTarget; set => _seeTarget = value; }
-
-    public void Awake() => CacheComponents();
+    
+    public void OnEnable()
+    {
+        tmp();
+        CacheComponents();
+    }
 
     private void Start() => EnemyStateMachine.Initialize(EnemyIdleState);
     
