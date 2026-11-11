@@ -36,6 +36,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public EnemyPatrolState EnemyPatrolState{get; set;}
     public EnemyDeadState EnemyDeadState{get; set;}
 
+    [SerializeField] private bool _seeTarget;
+    public bool SeeTarget { get => _seeTarget; set => _seeTarget = value; }
+
     public void Awake() => CacheComponents();
 
     private void Start() => EnemyStateMachine.Initialize(EnemyIdleState);
@@ -68,6 +71,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if ((_targetMask & (1 << other.gameObject.layer)) !=0)
         {
             SetTarget(null);
+            _seeTarget = false;
             EnemyStateMachine.ChangeState(EnemyPatrolState);
         }
     }
