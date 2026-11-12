@@ -11,6 +11,8 @@ public class Stratagem : MonoBehaviour
     [SerializeField] private InputActionReference _leftAction;
     [SerializeField] private InputActionReference _rightAction;
     
+    [SerializeField] private StratagemEffect _stratagemEffect;
+    
     [SerializeField] private List<String> _stratagemslist;
     
     private PlayerShooter _playerShooter;

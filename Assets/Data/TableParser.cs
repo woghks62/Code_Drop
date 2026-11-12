@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TableParser : MonoBehaviour
 {
     private const int GUN_COLUMN_COUNT = 8;
     private const int ENEMY_COLUMN_COUNT = 10;
+    private const int STRATAGEM_COLUMN_COUNT = 5;
     
     [Header("gunData")]
     [SerializeField] private TextAsset _gunDataFile;
@@ -13,13 +15,17 @@ public class TableParser : MonoBehaviour
 
     [Header("EnemyData")] 
     [SerializeField] private TextAsset _enemyDataFile;
-
     [SerializeField] private List<EnemyStats> _enemyStatsList = new();
+    
+    [Header("StratagemEffect")]
+    [SerializeField] private TextAsset _stratagemDataFile;
+    [SerializeField] private List<StratagemEffect> _stratagemEffectsList = new();
 
     private void Awake()
     {
         LoadGunTable();
         LoadEnemyTable();
+        LoadStratagemEffectTable();
     }
 
     private void LoadGunTable()
@@ -118,6 +124,44 @@ public class TableParser : MonoBehaviour
                 damage,
                 attackRange,
                 projectileSpeed
+            );
+        }
+    }
+
+    private void LoadStratagemEffectTable()
+    {
+        string[] lines = _stratagemDataFile.text.Split(
+            new char[] { '\r', '\n' }, 
+            StringSplitOptions.RemoveEmptyEntries
+        );
+        
+        for (int i = 2; i < lines.Length; i++)  
+        {  
+            string[] cells = lines[i].Split(',');
+            
+            if (cells.Length != STRATAGEM_COLUMN_COUNT)  
+            {  
+                Debug.Log($"cells.Length != STRATAGEM_COLUMN_COUNT");  
+                continue;  
+            }
+            
+            int useLimit,code;
+            string name;
+            float cooldown, waitTime;
+            
+            if (!int.TryParse(cells[1], out code)
+                || !float.TryParse(cells[2], out cooldown)
+                || !int.TryParse(cells[3], out useLimit)
+                || !float.TryParse(cells[4], out waitTime))
+            {
+                Debug.LogError("여기도 뭔가 이상하다");
+                continue;
+            }
+
+            name = cells[0];
+            
+            _stratagemEffectsList[i-2].SetData(
+                name,code,cooldown, useLimit, waitTime
             );
         }
     }
