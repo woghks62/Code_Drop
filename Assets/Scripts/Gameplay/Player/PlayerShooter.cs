@@ -6,12 +6,16 @@ public class PlayerShooter : MonoBehaviour
 {
     private const int SHOTGUN_BULLET_AMOUNT = 10;
     
+    [SerializeField] private InputActionReference _fireAction;
+    [SerializeField] private InputActionReference _reloadAction;
+    
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private SniperBullet _sniperbulletPrefab;
     [SerializeField] private Transform _firePoint;
-    [SerializeField] private InputActionReference _fireAction;
-    [SerializeField] private InputActionReference _reloadAction;
+    
     [SerializeField] private bool _isReloading;
+    [SerializeField] private bool _isStratagem;
+    public bool IsStratagem {get => _isStratagem; set => _isStratagem = value; }
     
     [Header("현재 들고 있는 총")]
     [SerializeField] private int _id;
@@ -41,6 +45,7 @@ public class PlayerShooter : MonoBehaviour
         _time += Time.deltaTime;
         
         if (_isReloading) return;
+        if (_isStratagem) return;
         
         if (_isShooting && _guncapacity > 0)
         {
