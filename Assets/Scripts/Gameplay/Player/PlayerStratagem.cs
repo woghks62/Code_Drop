@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Stratagem : MonoBehaviour
+public class PlayerStratagem : MonoBehaviour
 {
     [SerializeField] private InputActionReference _stratagemAction;
     [SerializeField] private InputActionReference _upAction;
@@ -11,9 +11,14 @@ public class Stratagem : MonoBehaviour
     [SerializeField] private InputActionReference _leftAction;
     [SerializeField] private InputActionReference _rightAction;
     
-    [SerializeField] private StratagemEffect _stratagemEffect;
+    [SerializeField] private Stratagem _currentStratagem;
+    public Stratagem CurrentStratagem => _currentStratagem;
     
-    [SerializeField] private List<String> _stratagemslist;
+    [SerializeField] private string _code;
+
+    [SerializeField] private List<Stratagem> _stratagemlist;
+    
+    [SerializeField] private Transform _handTransform;
     
     private PlayerShooter _playerShooter;
     private void Awake() => _playerShooter = GetComponent<PlayerShooter>();
@@ -22,43 +27,48 @@ public class Stratagem : MonoBehaviour
 
     private void OnStratagemButtonDown(InputAction.CallbackContext context)
     {
-        _playerShooter.IsStratagem = true;
         StratagemOpen();
-        Debug.Log(_playerShooter.IsStratagem);
     }
 
     private void OnStratagemButtonUp(InputAction.CallbackContext context)
     {
-        _playerShooter.IsStratagem = false;
         StratagemClose();
-        
-        Debug.Log(_playerShooter.IsStratagem);
 
-        for (int i = 0; i < _stratagemslist.Count; i++)
+        for (int i = 0; i < _stratagemlist.Count; i++)
         {
-            Debug.Log(_stratagemslist[i]);    
+            if (_code == _stratagemlist[i].StratagemEffect.Code)
+            {
+                Debug.Log($"같은 코드가 있어요!! : {_stratagemlist[i]}");
+                _currentStratagem = _stratagemlist[i];
+                _playerShooter.HasStratagem = true;
+                _stratagemlist[i].gameObject.transform.SetParent(_handTransform);
+                _stratagemlist[i].transform.position = _handTransform.position;
+                _stratagemlist[i].gameObject.SetActive(true);
+                _stratagemlist[i].gameObject.GetComponent<Rigidbody>().useGravity =  false;
+            }
         }
-        _stratagemslist.Clear();
+        
+        _code = null;
     }
 
     private void OnUpButtonDown(InputAction.CallbackContext context)
     {
-        _stratagemslist.Add("up");
+        _code += 1;
     }
 
     private void OnDownButtonUp(InputAction.CallbackContext context)
     {
-        _stratagemslist.Add("down");
+        _code += 2;
     }
 
     private void OnLeftButtonDown(InputAction.CallbackContext context)
     {
-        _stratagemslist.Add("left");
+        _code += 3;
     }
 
     private void OnRightButtonDown(InputAction.CallbackContext context)
     {
-        _stratagemslist.Add("right");
+        _code += 4;
     }
 
     private void StratagemOpen()

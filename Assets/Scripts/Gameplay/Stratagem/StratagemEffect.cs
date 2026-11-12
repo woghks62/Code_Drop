@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class StratagemEffect : ScriptableObject
 {
     [SerializeField] private string _name;
-    [SerializeField] private int _code;
+    [SerializeField] private string _code;
     [SerializeField] private float _cooldown;
     [SerializeField] private int _useLimit;
     [SerializeField] private float _waitTime;
@@ -13,7 +13,7 @@ public abstract class StratagemEffect : ScriptableObject
     [SerializeField] private StratagemEffect _effect;
     
     public string Name => _name;
-    public int Code => _code;
+    public string Code => _code;
     public float Cooldown => _cooldown;
     public int UseLimit => _useLimit;
     public float WaitTime => _waitTime;
@@ -24,7 +24,7 @@ public abstract class StratagemEffect : ScriptableObject
     
     public abstract void Apply();
 
-    public void SetData(string name, int code, float cooldown, int useLimit, float waitTime)
+    public void SetData(string name, string code, float cooldown, int useLimit, float waitTime)
     {
         _name = name;
         _code = code;

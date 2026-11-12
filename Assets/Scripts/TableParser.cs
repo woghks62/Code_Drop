@@ -145,12 +145,11 @@ public class TableParser : MonoBehaviour
                 continue;  
             }
             
-            int useLimit,code;
-            string name;
+            int useLimit;
+            string name, code;
             float cooldown, waitTime;
             
-            if (!int.TryParse(cells[1], out code)
-                || !float.TryParse(cells[2], out cooldown)
+            if (!float.TryParse(cells[2], out cooldown)
                 || !int.TryParse(cells[3], out useLimit)
                 || !float.TryParse(cells[4], out waitTime))
             {
@@ -159,6 +158,7 @@ public class TableParser : MonoBehaviour
             }
 
             name = cells[0];
+            code = cells[1];
             
             _stratagemEffectsList[i-2].SetData(
                 name,code,cooldown, useLimit, waitTime
