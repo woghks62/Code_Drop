@@ -52,6 +52,7 @@ public class RangeEnemy : EnemyBase
         Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, 30);
         Vector3 spread = spredDirection + _firePoint.position;
         Bullet _bullet = Instantiate(_enemyBullet, spread, _firePoint.rotation);
+        _bullet.Damage = Damage;
         _time = 0;
     }
     
