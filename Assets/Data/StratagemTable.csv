@@ -1,4 +1,4 @@
 이름,코드,쿨타임,사용횟수,대기시간
 String,String,Float,int,float
 Tower,1234,0,3,30
-AmmoSupply,2314,30,-1,10
+AmmoSupply,4321,30,-1,10

@@ -15,6 +15,8 @@ public class Stratagem : MonoBehaviour
         if ((_targetLayer & (1 << other.gameObject.layer)) != 0)
         {
             _stratagemEffect.Apply();    
+            _useCount++;
+            gameObject.SetActive(false);
         }
         // 추후에 땅에 닿았을때만 작동하게 변경 예정
         // targetLayer 추가 후 설정 예정

@@ -10,6 +10,7 @@ public class PlayerStratagem : MonoBehaviour
     [SerializeField] private InputActionReference _downAction;
     [SerializeField] private InputActionReference _leftAction;
     [SerializeField] private InputActionReference _rightAction;
+    [SerializeField] private InputActionReference _throwAction;
     
     [SerializeField] private Stratagem _currentStratagem;
     public Stratagem CurrentStratagem => _currentStratagem;
@@ -25,6 +26,26 @@ public class PlayerStratagem : MonoBehaviour
     private void OnEnable() => BindInputEvents();
     private void OnDisable() => UnBindInputEvents();
 
+    private void HoldStratagem(int index)
+    {
+        _currentStratagem = _stratagemlist[index];
+        _playerShooter.HasStratagem = true;
+        _stratagemlist[index].gameObject.transform.SetParent(_handTransform);
+        _stratagemlist[index].transform.position = _handTransform.position;
+        _stratagemlist[index].gameObject.SetActive(true);
+        _stratagemlist[index].gameObject.GetComponent<Rigidbody>().useGravity = false;
+        _stratagemlist[index].gameObject.GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    private void DownStratagem()
+    {
+        if(_currentStratagem == null) return;
+        
+        _currentStratagem.gameObject.SetActive(false);
+        _currentStratagem = null;
+        _playerShooter.HasStratagem = false;
+    }
+
     private void OnStratagemButtonDown(InputAction.CallbackContext context)
     {
         StratagemOpen();
@@ -39,16 +60,52 @@ public class PlayerStratagem : MonoBehaviour
             if (_code == _stratagemlist[i].StratagemEffect.Code)
             {
                 Debug.Log($"같은 코드가 있어요!! : {_stratagemlist[i]}");
-                _currentStratagem = _stratagemlist[i];
-                _playerShooter.HasStratagem = true;
-                _stratagemlist[i].gameObject.transform.SetParent(_handTransform);
-                _stratagemlist[i].transform.position = _handTransform.position;
-                _stratagemlist[i].gameObject.SetActive(true);
-                _stratagemlist[i].gameObject.GetComponent<Rigidbody>().useGravity =  false;
+
+                // 사용가능한 횟수가 0이 아니라면
+                if (_stratagemlist[i].StratagemEffect.UseLimit != 0)
+                {
+                    // 사용 가능한 횟수가 0보다 작다면 (무한 사용 가능)(내가 정한 룰)
+                    if (_stratagemlist[i].StratagemEffect.UseLimit < 0)
+                    {
+                        DownStratagem();
+                        HoldStratagem(i);
+                    }
+                    // 사용 가능한 횟수가 0보다 크다면 (사용 횟수 정해져 있음)
+                    else
+                    {
+                        // 사용한 횟수가 사용 가능한 횟수보다 작으면 실행
+                        if (_stratagemlist[i].UseCount < _stratagemlist[i].StratagemEffect.UseLimit)
+                        {
+                            // _stratagemlist[i].UseCount++; 나중에 던졌을때 거기서 Count 늘리는 방식으로 변경
+                            DownStratagem();
+                            HoldStratagem(i);
+
+                        }
+                        else
+                        {
+                            Debug.Log("사용 횟수 다 사용했어요");
+                        }
+                    }
+                }
             }
         }
         
         _code = null;
+    }
+
+    private void OnThrowButtonDown(InputAction.CallbackContext context)
+    {
+        if (!_playerShooter.HasStratagem)
+        {
+            return;
+        }
+
+        Rigidbody _rigidStratagem = _currentStratagem.GetComponent<Rigidbody>();
+        _currentStratagem.gameObject.transform.SetParent(null);
+        _rigidStratagem.isKinematic = false;
+        _rigidStratagem.AddForce(_handTransform.forward * 10, ForceMode.Impulse);
+        _rigidStratagem.useGravity = true;
+        _playerShooter.HasStratagem = false;
     }
 
     private void OnUpButtonDown(InputAction.CallbackContext context)
@@ -94,8 +151,10 @@ public class PlayerStratagem : MonoBehaviour
         _downAction.action.Enable();
         _leftAction.action.Enable();
         _rightAction.action.Enable();
+        _throwAction.action.Enable();
         _stratagemAction.action.performed += OnStratagemButtonDown;
         _stratagemAction.action.canceled += OnStratagemButtonUp;
+        _throwAction.action.performed += OnThrowButtonDown;
     }
 
     private void UnBindInputEvents()
@@ -105,7 +164,9 @@ public class PlayerStratagem : MonoBehaviour
         _downAction.action.Disable();
         _leftAction.action.Disable();
         _rightAction.action.Disable();
+        _throwAction.action.Disable();
         _stratagemAction.action.performed -= OnStratagemButtonDown;
         _stratagemAction.action.canceled -= OnStratagemButtonUp;
+        _throwAction.action.performed -= OnThrowButtonDown;
     }
 }

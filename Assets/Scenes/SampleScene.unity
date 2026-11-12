@@ -695,7 +695,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3844,6 +3844,7 @@ MonoBehaviour:
   _downAction: {fileID: -5039831218644259658, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _leftAction: {fileID: 5973188056467579240, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _rightAction: {fileID: 6538285269342630471, guid: ac58428ea15cec046a4edb4228311890, type: 3}
+  _throwAction: {fileID: -5320963292912064269, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _currentStratagem: {fileID: 0}
   _code: 
   _stratagemlist:
