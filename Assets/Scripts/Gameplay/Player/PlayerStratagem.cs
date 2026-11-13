@@ -32,16 +32,20 @@ public class PlayerStratagem : MonoBehaviour
         _playerShooter.HasStratagem = true;
         _stratagemlist[index].gameObject.transform.SetParent(_handTransform);
         _stratagemlist[index].transform.position = _handTransform.position;
-        _stratagemlist[index].gameObject.SetActive(true);
-        _stratagemlist[index].gameObject.GetComponent<Rigidbody>().useGravity = false;
-        _stratagemlist[index].gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        _currentStratagem.Child.SetActive(true);
+        _stratagemlist[index].gameObject.GetComponentInChildren<Rigidbody>().useGravity = false;
+        _stratagemlist[index].gameObject.GetComponentInChildren<Rigidbody>().isKinematic = true;
+        _currentStratagem.CanExecute = true;
     }
 
     private void DownStratagem()
     {
         if(_currentStratagem == null) return;
+        Debug.Log("Down Stratagem 실행");
         
-        _currentStratagem.gameObject.SetActive(false);
+        _currentStratagem.CanExecute = false;
+        _currentStratagem.Child.gameObject.SetActive(false);
+        _currentStratagem.transform.SetParent(null);
         _currentStratagem = null;
         _playerShooter.HasStratagem = false;
     }
@@ -59,6 +63,14 @@ public class PlayerStratagem : MonoBehaviour
         {
             if (_code == _stratagemlist[i].StratagemEffect.Code)
             {
+                // 해당 스트라타젬 쿨타임이 지나지 않았으면 발동 X
+                if (_stratagemlist[i].CoolTime < _stratagemlist[i].StratagemEffect.Cooldown)
+                {
+                    Debug.Log("쿨타임이 안됐어요");
+                    DownStratagem();
+                    _code = null;
+                    return;
+                }
                 Debug.Log($"같은 코드가 있어요!! : {_stratagemlist[i]}");
 
                 // 사용가능한 횟수가 0이 아니라면
@@ -89,6 +101,11 @@ public class PlayerStratagem : MonoBehaviour
                 }
             }
         }
+
+        if (_currentStratagem == null)
+        {
+            Debug.Log("같은 코드가 없어요");
+        }
         
         _code = null;
     }
@@ -100,12 +117,14 @@ public class PlayerStratagem : MonoBehaviour
             return;
         }
 
-        Rigidbody _rigidStratagem = _currentStratagem.GetComponent<Rigidbody>();
-        _currentStratagem.gameObject.transform.SetParent(null);
+        Rigidbody _rigidStratagem = _currentStratagem.GetComponentInChildren<Rigidbody>();
+        _currentStratagem.transform.SetParent(null);
+        _currentStratagem.CoolTime = 0;
         _rigidStratagem.isKinematic = false;
         _rigidStratagem.AddForce(_handTransform.forward * 10, ForceMode.Impulse);
         _rigidStratagem.useGravity = true;
         _playerShooter.HasStratagem = false;
+        _currentStratagem = null;
     }
 
     private void OnUpButtonDown(InputAction.CallbackContext context)
