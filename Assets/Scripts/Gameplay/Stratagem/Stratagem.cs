@@ -1,23 +1,27 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stratagem : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayer;
     
     [SerializeField] private StratagemEffect _stratagemEffect;
-    [SerializeField] private int _useCount;
-    [SerializeField] private float _cooltime;
-    public float CoolTime {get => _cooltime; set => _cooltime = value; }
-
     [SerializeField] private GameObject _child;
-    public GameObject Child {get => _child; set => _child = value; }
-    
+    [SerializeField] private int _useCount;
     [SerializeField] private bool _canExecute;
-    public bool CanExecute { get => _canExecute; set => _canExecute = value; }
+    [SerializeField] private float _cooltime;
     
+    // [SerializeField] private GameObject _uiprefabs;
+    // [SerializeField] private GameObject _canvas;
+
+    [SerializeField] private GameObject _beaconPrefabs;
     
     public StratagemEffect StratagemEffect {get => _stratagemEffect; set => _stratagemEffect = value; }
+    public GameObject Child {get => _child; set => _child = value; }
     public int UseCount { get => _useCount; set => _useCount = value; }
+    public bool CanExecute { get => _canExecute; set => _canExecute = value; }
+    public float CoolTime {get => _cooltime; set => _cooltime = value; }
+
 
     private void Update()
     {
@@ -33,7 +37,22 @@ public class Stratagem : MonoBehaviour
         {
             if (_canExecute == false) return;
             
-            _stratagemEffect.Apply();    
+            Transform beaconposition = gameObject.transform;
+            Debug.Log(gameObject.transform.position);
+            
+            Vector3 position = new Vector3(beaconposition.position.x, 0, beaconposition.position.z);
+            StartCoroutine(_stratagemEffect.ApplyRoutine(_stratagemEffect.WaitTime, position));
+            
+            GameObject beacon = Instantiate(_beaconPrefabs,position,Quaternion.identity);
+            beacon.GetComponent<MeshRenderer>().material = _stratagemEffect.BeaconMaterial;
+            
+            // GameObject a = Instantiate(_uiprefabs);
+            // a.transform.SetParent(_canvas.transform);
+            // Image image = a.GetComponentInChildren<Image>();
+            // Debug.Log(image.gameObject.name);
+            // image = _stratagemEffect.Icon;
+            // image.material = _stratagemEffect.BeaconMaterial;
+            
             _useCount++;
             _canExecute = false;
             //gameObject.SetActive(false);

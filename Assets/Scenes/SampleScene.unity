@@ -655,10 +655,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _stratagemEffect: {fileID: 11400000, guid: 2a6aa78228f8b2442935f19aa11f20e4, type: 2}
-  _useCount: 0
-  _cooltime: 0
   _child: {fileID: 695231365}
+  _useCount: 0
   _canExecute: 0
+  _cooltime: 0
+  _beaconPrefabs: {fileID: 1138544227501813341, guid: 94de99ebbd5d5cf489023fcbc4da9d82, type: 3}
 --- !u!4 &273583852
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,7 +1530,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 726776722cb6a574a8ff2797f9fdc943, type: 2}
+  - {fileID: 2100000, guid: 3ce23d6eae8df3843bd23214b8b99fce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2852,10 +2853,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _stratagemEffect: {fileID: 11400000, guid: 41c05457792399c4aac9c1278816d0cc, type: 2}
-  _useCount: 0
-  _cooltime: 0
   _child: {fileID: 1944300759}
+  _useCount: 0
   _canExecute: 0
+  _cooltime: 0
+  _beaconPrefabs: {fileID: 1138544227501813341, guid: 94de99ebbd5d5cf489023fcbc4da9d82, type: 3}
 --- !u!4 &1504211192
 Transform:
   m_ObjectHideFlags: 0
@@ -2916,7 +2918,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3376,7 +3378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 726776722cb6a574a8ff2797f9fdc943, type: 2}
+  - {fileID: 2100000, guid: 3ce23d6eae8df3843bd23214b8b99fce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
