@@ -16,7 +16,7 @@ public class EnemyIdleState : IEnemyState
 
     public void Execute()
     {
-        Debug.Log("Idle 실행중");
+        //Debug.Log("Idle 실행중");
     }
 
     public void Exit()
