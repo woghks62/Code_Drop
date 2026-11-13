@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +23,7 @@ public abstract class StratagemEffect : ScriptableObject
     public StratagemEffect Effect => _effect;
     
     
-    public abstract void Apply();
+    public abstract IEnumerator ApplyRoutine(float time, Vector3 position);
 
     public void SetData(string name, string code, float cooldown, int useLimit, float waitTime)
     {

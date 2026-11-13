@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8850d9277de93684dbfb8d35ddc8ba8a, type: 3}
   m_Name: AmmoSupply
   m_EditorClassIdentifier: Assembly-CSharp::AmmoSupply
-  _name: 
-  _code: 0
-  _cooldown: 0
-  _useLimit: 0
-  _waitTime: 0
-  _icon: {fileID: 0}
-  _beaconmaterial: {fileID: 0}
+  _name: AmmoSupply
+  _code: 4321
+  _cooldown: 30
+  _useLimit: -1
+  _waitTime: 10
+  _icon: {fileID: 7894830337996653214, guid: bc183182b50ff1747a3870d2fab2a7d9, type: 3}
+  _beaconmaterial: {fileID: 2100000, guid: 726776722cb6a574a8ff2797f9fdc943, type: 2}
   _effect: {fileID: 0}
+  ammo: {fileID: 4618057860183438053, guid: e0792041068532c42bf9b8e0fe3e5a0e, type: 3}
