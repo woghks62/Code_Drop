@@ -53,7 +53,7 @@
 - 작성 규칙 : `Docs/Documentation/Tech Doc Rule.md`
 
 ### 시스템 기술 문서 (해당 시스템 문서 작성·수정 시)
-- (등록된 문서 없음)
+- 스트라타잼 : `Docs/Systems/Stratagem.md`
 
 ### 컨벤션 / 기술 스택 (코드 관련 힌트 제시, 기술 문서 작성·검수 시)
 - 기술 스택 : `Docs/TechSpec.md`
