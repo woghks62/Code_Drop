@@ -22,8 +22,7 @@ public abstract class StratagemEffect : ScriptableObject
     public Material BeaconMaterial => _beaconmaterial;
     public StratagemEffect Effect => _effect;
     
-    
-    public abstract IEnumerator ApplyRoutine(float time, Vector3 position);
+    public abstract void Apply(Vector3 position);
 
     public void SetData(string name, string code, float cooldown, int useLimit, float waitTime)
     {
