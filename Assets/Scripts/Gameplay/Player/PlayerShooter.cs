@@ -34,9 +34,10 @@ public class PlayerShooter : MonoBehaviour
     private Gun _gun;
     private bool _isShooting;
     private float _time;
-    
+
+    public string CurrentGunName => _currentGunName;
     public int GunCapacity  => _guncapacity;
-    public int SpareMagazine => _spareMagazine;
+    public int SpareMagazine {get => _spareMagazine; set => _spareMagazine = value;}
     public bool IsReloading =>  _isReloading;
     
     private void OnEnable()
