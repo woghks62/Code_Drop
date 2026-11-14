@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] private LayerMask _beaconLayer;
     [SerializeField] private LayerMask _targetLayer;
     [SerializeField] private List<EnemyBase> _enemies = new();
     [SerializeField] private EnemyBase _currentTarget;
@@ -16,8 +15,6 @@ public class Turret : MonoBehaviour
     [SerializeField] private float _cooldown;
     [SerializeField] private Transform _headTransform;
     [SerializeField] private Transform _muzzlePoint;
-
-    [SerializeField] private bool _canAttack;
     
     private float _currentCooldown;
     private bool _isReadyToFire => _currentCooldown >= _cooldown;
@@ -44,11 +41,6 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((_beaconLayer.value &  (1 << other.gameObject.layer)) == 0)
-        {
-            _canAttack = true;
-        }
-        
         if ((_targetLayer.value & (1 << other.gameObject.layer)) == 0)
         {
             return;
@@ -143,7 +135,7 @@ public class Turret : MonoBehaviour
 
     private void Fire()
     {
-        if (_currentTarget == null || !_isReadyToFire || !_canAttack)
+        if (_currentTarget == null || !_isReadyToFire)
         {
             return;
         }
