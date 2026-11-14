@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +43,10 @@ public class Stratagem : MonoBehaviour
             Debug.Log(gameObject.transform.position);
             
             Vector3 position = new Vector3(beaconposition.position.x, 0, beaconposition.position.z);
-            StartCoroutine(_stratagemEffect.ApplyRoutine(_stratagemEffect.WaitTime, position));
+            
+            //StartCoroutine(_stratagemEffect.ApplyRoutine(_stratagemEffect.WaitTime, position));
+            
+            StartCoroutine(DropRoutine(_stratagemEffect, _stratagemEffect.WaitTime, position));
             
             GameObject beacon = Instantiate(_beaconPrefabs,position,Quaternion.identity);
             beacon.GetComponent<MeshRenderer>().material = _stratagemEffect.BeaconMaterial;
@@ -61,5 +66,13 @@ public class Stratagem : MonoBehaviour
                 _child.SetActive(false);
             }
         }
+    }
+
+    [SerializeField] private DropSupply _dropObject;
+    private IEnumerator DropRoutine(StratagemEffect effect, float waittime, Vector3 position)
+    {
+        yield return new WaitForSeconds(waittime);
+        DropSupply drop = Instantiate(_dropObject, new Vector3(position.x, 30, position.z), Quaternion.identity);
+        drop.SetEffect(effect,position);
     }
 }
