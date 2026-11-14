@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95f899fc9d4a6704eae7042466f64305, type: 3}
-  m_Name: Tower
-  m_EditorClassIdentifier: Assembly-CSharp::Tower
-  _name: Tower
-  _code: 1234
+  m_Script: {fileID: 11500000, guid: 71f7511b793b73042a78ec9865c14778, type: 3}
+  m_Name: BombSupply
+  m_EditorClassIdentifier: Assembly-CSharp::Bomb
+  _name: Bomb
+  _code: 1324
   _cooldown: 0
-  _useLimit: 3
-  _waitTime: 30
-  _icon: {fileID: 943538961020439766, guid: 0f5842bdee8a8fe4ebd44b92304b79fa, type: 3}
+  _useLimit: 2
+  _waitTime: 15
+  _icon: {fileID: 0}
   _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
   _effect: {fileID: 0}
-  _tower: {fileID: 2813174993534754165, guid: cc125391c8c63f94ea6b21448f38d673, type: 3}
+  _bomb: {fileID: 1138544227501813341, guid: d763191e239714745a2469593be8d206, type: 3}

@@ -2,3 +2,4 @@
 String,String,Float,int,float
 Tower,1234,0,3,30
 AmmoSupply,4321,30,-1,10
+Bomb,1324,0,2,15
