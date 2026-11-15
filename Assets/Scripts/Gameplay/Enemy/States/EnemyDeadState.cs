@@ -12,6 +12,7 @@ public class EnemyDeadState : IEnemyState
     public void Enter()
     {
         Debug.Log("Dead 진입");
+        _enemyBase.Animator.SetBool("IsDead", true);
     }
 
     public void Execute()

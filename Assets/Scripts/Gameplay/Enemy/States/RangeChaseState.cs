@@ -12,6 +12,7 @@ public class RangeChaseState : IEnemyState
     public void Enter()
     {
         Debug.Log("RangeChaseState 진입");
+        _rangeEnemy.Animator.SetBool("IsChasing", true);
     }
 
     public void Execute()
@@ -32,5 +33,6 @@ public class RangeChaseState : IEnemyState
     public void Exit()
     {
         Debug.Log("RangeChaseState 종료");
+        _rangeEnemy.Animator.SetBool("IsChasing", false);
     }
 }

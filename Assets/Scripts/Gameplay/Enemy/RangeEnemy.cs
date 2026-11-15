@@ -49,22 +49,13 @@ public class RangeEnemy : EnemyBase
             return;
         }
         
-        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, 30);
-        Vector3 spread = spredDirection + _firePoint.position;
-        Bullet _bullet = Instantiate(_enemyBullet, spread, _firePoint.rotation);
+        Vector3 direction = Target.transform.GetComponent<Collider>().bounds.center - _firePoint.position;
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        Bullet _bullet = Instantiate(_enemyBullet, _firePoint.position, rotation);
         _bullet.Damage = Damage;
         _time = 0;
     }
-    
-    private Vector3 GetSpredDirection(Vector3 forwardDirection, float spreadAngle)
-    {
-        float spreadX = Random.Range(-spreadAngle, spreadAngle);
-        float spreadY = Random.Range(-spreadAngle, spreadAngle);
-
-        Vector3 spreadDirection = Quaternion.Euler(spreadX, spreadY, 0) * forwardDirection;
-        return spreadDirection;
-    }
-    
     private void CheckPlayer()
     {
         if (EnemyStateMachine.CurrentState == RangeChaseState)

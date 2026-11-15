@@ -7,7 +7,6 @@ public class MeleeKnife : MonoBehaviour
 
     private void Awake()
     {
-        _collider = GetComponent<Collider>();
         _collider.enabled = false;
     }
 

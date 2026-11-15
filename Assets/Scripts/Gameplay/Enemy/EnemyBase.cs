@@ -5,6 +5,9 @@ using UnityEditor;  // OnDrawGizmos
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
+    [SerializeField] private Animator _animator;
+    public Animator Animator => _animator;
+    
     [SerializeField] protected LayerMask _targetMask;
     
     [SerializeField] private int _currentHealth;
@@ -118,6 +121,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         EnemyIdleState = new EnemyIdleState(this);
         EnemyPatrolState = new EnemyPatrolState(this);
         EnemyDeadState = new EnemyDeadState(this);
+        _animator = GetComponent<Animator>();
     }
     
     // ------------------------------------ 에디터 확인용
