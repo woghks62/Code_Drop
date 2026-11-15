@@ -14,12 +14,11 @@ public class EnemyPatrolState : IEnemyState
     public void Enter()
     {
         Debug.Log("Patrol 진입");
+        _enemyBase.Animator.SetBool("IsPatrolling", true);
     }
 
     public void Execute()
     {
-        Debug.Log("Patrol 실행 중");
-
         if (_enemyBase.PatroltransfomList.Count == 0)
         {
             return;
@@ -44,5 +43,6 @@ public class EnemyPatrolState : IEnemyState
     public void Exit()
     {
         Debug.Log("Patrol 나감");
+        _enemyBase.Animator.SetBool("IsPatrolling", false);
     }
 }

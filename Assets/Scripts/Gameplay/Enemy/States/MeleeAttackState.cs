@@ -12,30 +12,20 @@ public class MeleeAttackState : IEnemyState
     public void Enter()
     {
         Debug.Log("Attack 진입");
+        _meleeEnemy.Animator.SetBool("IsAttacking", true);
+
     }
 
     public void Execute()
     {
-        // 테스트
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            _meleeEnemy.Attack();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            _meleeEnemy.AttackFinish();
-        }
-        
         if (_meleeEnemy.IsAttack) return;
-        
-        // 공격 애니메이션 실행
-        Debug.Log("Attack 실행중");
-        Debug.Log("공격 애니메이션 진행 중");
+        _meleeEnemy.transform.LookAt(_meleeEnemy.Target.transform);
     }
 
     public void Exit()
     {
         Debug.Log("Attack 종료");
+        _meleeEnemy.Animator.SetBool("IsAttacking", false);
+
     }
 }

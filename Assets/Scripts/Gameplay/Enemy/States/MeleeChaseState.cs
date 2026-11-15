@@ -12,11 +12,11 @@ public class MeleeChaseState : IEnemyState
     public void Enter()
     {
         Debug.Log("Chase 진입");
+        _enemyBase.Animator.SetBool("IsChasing", true);
     }
 
     public void Execute()
     {
-        Debug.Log("Chase 실행중");
         Vector3 direction = _enemyBase.Target.transform.position - _enemyBase.gameObject.transform.position;
 
         direction.y = 0f;
@@ -33,5 +33,6 @@ public class MeleeChaseState : IEnemyState
     public void Exit()
     {
         Debug.Log("Chase 종료");
+        _enemyBase.Animator.SetBool("IsChasing", false);
     }
 }
