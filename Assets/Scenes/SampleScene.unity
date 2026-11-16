@@ -905,7 +905,7 @@ MonoBehaviour:
   _canExecute: 0
   _cooltime: 0
   _beaconPrefabs: {fileID: 6328792334216087073, guid: cddef45759cdda9489f1e75c91160780, type: 3}
-  _dropObject: {fileID: 6468718434890806924, guid: 79a007edff72fdc49819d6d7f6b3680c, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
 --- !u!4 &273583852
 Transform:
   m_ObjectHideFlags: 0
@@ -4514,7 +4514,7 @@ MonoBehaviour:
   _canExecute: 0
   _cooltime: 0
   _beaconPrefabs: {fileID: 4658472300605470893, guid: e90a269faf13d0a4a972080a2c000841, type: 3}
-  _dropObject: {fileID: 6468718434890806924, guid: 79a007edff72fdc49819d6d7f6b3680c, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
 --- !u!4 &1504211192
 Transform:
   m_ObjectHideFlags: 0
@@ -5178,7 +5178,7 @@ MonoBehaviour:
   _canExecute: 0
   _cooltime: 0
   _beaconPrefabs: {fileID: 6902954657262378711, guid: 05126bdff72065e49a81cd2ea7bc2fd4, type: 3}
-  _dropObject: {fileID: 6468718434890806924, guid: 79a007edff72fdc49819d6d7f6b3680c, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
 --- !u!4 &1694320476
 Transform:
   m_ObjectHideFlags: 0
