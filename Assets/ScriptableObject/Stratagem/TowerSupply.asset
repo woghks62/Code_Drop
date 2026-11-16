@@ -20,4 +20,6 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
   _effect: {fileID: 0}
+  _beaconPrefabs: {fileID: 6328792334216087073, guid: cddef45759cdda9489f1e75c91160780, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
   _tower: {fileID: 1593354002454851231, guid: 0940f7fc400303647b86dd3487eb30bb, type: 3}

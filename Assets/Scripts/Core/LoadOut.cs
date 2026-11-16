@@ -11,6 +11,12 @@ public class LoadOut : MonoBehaviour
     [SerializeField] private List<StratagemEffect> _stratagemlists;
     public List<StratagemEffect> StratagemList {get => _stratagemlists; set =>_stratagemlists = value;}
     
+    private void Awake()
+    {
+        _weaponUI.gameObject.SetActive(true);
+        _stratagemUI.gameObject.SetActive(false);
+    }
+    
     public void ChoiceRifle()
     {
         GameManager.Instance.GameData.ChoiceGun = gunlists[0];

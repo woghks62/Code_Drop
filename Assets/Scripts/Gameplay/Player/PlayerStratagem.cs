@@ -23,6 +23,14 @@ public class PlayerStratagem : MonoBehaviour
     
     private PlayerShooter _playerShooter;
     private void Awake() => _playerShooter = GetComponent<PlayerShooter>();
+
+    private void Start()
+    {
+        for (int i = 0; i < _stratagemlist.Count; i++)
+        {
+            _stratagemlist[i].StratagemEffect = GameManager.Instance.GameData.StratagemEffectList[i];
+        }
+    }
     private void OnEnable() => BindInputEvents();
     private void OnDisable() => UnBindInputEvents();
 

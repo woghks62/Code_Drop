@@ -12,6 +12,8 @@ public abstract class StratagemEffect : ScriptableObject
     [SerializeField] private Image _icon;
     [SerializeField] private Material _beaconmaterial;
     [SerializeField] private StratagemEffect _effect;
+    [SerializeField] private GameObject _beaconPrefabs;
+    [SerializeField] private DropSupply _dropObject;
     
     public string Name => _name;
     public string Code => _code;
@@ -21,6 +23,8 @@ public abstract class StratagemEffect : ScriptableObject
     public Image Icon => _icon;
     public Material BeaconMaterial => _beaconmaterial;
     public StratagemEffect Effect => _effect;
+    public GameObject BeaconPrefabs => _beaconPrefabs;
+    public DropSupply DropObject => _dropObject;
     
     public abstract void Apply(Vector3 position);
 
