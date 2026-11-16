@@ -17,7 +17,7 @@ MonoBehaviour:
   _cooldown: 0
   _useLimit: 3
   _waitTime: 30
-  _icon: {fileID: 943538961020439766, guid: 0f5842bdee8a8fe4ebd44b92304b79fa, type: 3}
+  _icon: {fileID: 0}
   _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
   _effect: {fileID: 0}
-  _tower: {fileID: 2813174993534754165, guid: cc125391c8c63f94ea6b21448f38d673, type: 3}
+  _tower: {fileID: 1593354002454851231, guid: 0940f7fc400303647b86dd3487eb30bb, type: 3}

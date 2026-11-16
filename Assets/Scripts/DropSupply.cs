@@ -18,6 +18,7 @@ public class DropSupply : MonoBehaviour
         if ((_beaconLayer & (1 << other.gameObject.layer)) != 0)
         {
             _stratagemeffect.Apply(_position);
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
