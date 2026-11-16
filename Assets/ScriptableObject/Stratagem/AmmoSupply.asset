@@ -20,4 +20,4 @@ MonoBehaviour:
   _icon: {fileID: 7894830337996653214, guid: bc183182b50ff1747a3870d2fab2a7d9, type: 3}
   _beaconmaterial: {fileID: 2100000, guid: 726776722cb6a574a8ff2797f9fdc943, type: 2}
   _effect: {fileID: 0}
-  ammo: {fileID: 4618057860183438053, guid: e0792041068532c42bf9b8e0fe3e5a0e, type: 3}
+  ammo: {fileID: 1956643727342860410, guid: e972f7e99f2175d469d2c27751d27df2, type: 3}
