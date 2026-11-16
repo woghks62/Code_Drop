@@ -22,6 +22,7 @@ public class WeaponChange : MonoBehaviour
 
     private void Awake()
     {
+        SetGunData();
         CacheComponents();
         InitWeapon();
     }
@@ -29,6 +30,13 @@ public class WeaponChange : MonoBehaviour
     private void OnDisable() => UnBindInputEvents();
 
     private int tmp;
+
+    private void SetGunData()
+    {
+        List<Gun> gunDatalists = GameManager.Instance.SetGameData();
+        _gunList.Add(gunDatalists[0]);
+        _gunList.Add(gunDatalists[1]);
+    }
 
     private void OnChangeWeapon1Button(InputAction.CallbackContext context)
     {
