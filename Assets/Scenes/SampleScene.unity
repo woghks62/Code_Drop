@@ -2637,7 +2637,7 @@ Transform:
   m_GameObject: {fileID: 884727971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.542}
+  m_LocalPosition: {x: 0, y: 0, z: 0.608}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6346,8 +6346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShooter
   _fireAction: {fileID: 6174639747417621864, guid: ac58428ea15cec046a4edb4228311890, type: 3}
   _reloadAction: {fileID: -8726203446644166395, guid: ac58428ea15cec046a4edb4228311890, type: 3}
-  _bulletPrefab: {fileID: 9053410063224838312, guid: a41e71dfa9d089c45a82c55f5e8fd3c0, type: 3}
-  _sniperbulletPrefab: {fileID: -1240781371932852738, guid: 450ee9129e37ec74cbce9ea3de1f1852, type: 3}
+  _bulletPrefab: {fileID: 7341029823822917669, guid: 652de7d2bdb0f2f44a8f9063288f242f, type: 3}
+  _sniperbulletPrefab: {fileID: 7902734009546740400, guid: 3313fa50a720296418a034d7bdd7e29f, type: 3}
   _firePoint: {fileID: 884727972}
   _isReloading: 0
   _hasStratagem: 0
@@ -6616,10 +6616,6 @@ PrefabInstance:
     - target: {fileID: 5621599763930544626, guid: 5cba2f45786aa1441bc7cf15b893c766, type: 3}
       propertyPath: m_Name
       value: RangeRobot4_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5621599763930544626, guid: 5cba2f45786aa1441bc7cf15b893c766, type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8405995448061354121, guid: 5cba2f45786aa1441bc7cf15b893c766, type: 3}
       propertyPath: m_LocalPosition.x
