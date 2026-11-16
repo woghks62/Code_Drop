@@ -49,7 +49,12 @@ public class Stratagem : MonoBehaviour
             StartCoroutine(DropRoutine(_stratagemEffect, _stratagemEffect.WaitTime, position));
             
             GameObject beacon = Instantiate(_beaconPrefabs,position,Quaternion.identity);
-            beacon.GetComponent<MeshRenderer>().material = _stratagemEffect.BeaconMaterial;
+
+            if (beacon.TryGetComponent<MeshRenderer>(out var meshRenderer))
+            {
+                meshRenderer.material= _stratagemEffect.BeaconMaterial;
+            }
+            //beacon.GetComponent<MeshRenderer>().material = _stratagemEffect.BeaconMaterial;
             
             // GameObject a = Instantiate(_uiprefabs);
             // a.transform.SetParent(_canvas.transform);
