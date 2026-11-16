@@ -20,4 +20,5 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
   _effect: {fileID: 0}
-  _bomb: {fileID: 1138544227501813341, guid: d763191e239714745a2469593be8d206, type: 3}
+  _bomb: {fileID: 8151323971514063974, guid: bbb5173688503ff4fb91711f0be30bf9, type: 3}
+  _bombEffect: {fileID: 9147178612028964860, guid: ad15d3291b132094c8cc0dd602000d57, type: 3}
