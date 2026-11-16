@@ -17,6 +17,7 @@ public class Stratagem : MonoBehaviour
     // [SerializeField] private GameObject _canvas;
 
     [SerializeField] private GameObject _beaconPrefabs;
+    [SerializeField] private DropSupply _dropObject;
     
     public StratagemEffect StratagemEffect {get => _stratagemEffect; set => _stratagemEffect = value; }
     public GameObject Child {get => _child; set => _child = value; }
@@ -73,7 +74,6 @@ public class Stratagem : MonoBehaviour
         }
     }
 
-    [SerializeField] private DropSupply _dropObject;
     private IEnumerator DropRoutine(StratagemEffect effect, float waittime, Vector3 position)
     {
         yield return new WaitForSeconds(waittime);
