@@ -15,8 +15,7 @@ public class Stratagem : MonoBehaviour
     
     // [SerializeField] private GameObject _uiprefabs;
     // [SerializeField] private GameObject _canvas;
-
-    [SerializeField] private GameObject _beaconPrefabs;
+    
     
     public StratagemEffect StratagemEffect {get => _stratagemEffect; set => _stratagemEffect = value; }
     public GameObject Child {get => _child; set => _child = value; }
@@ -48,7 +47,7 @@ public class Stratagem : MonoBehaviour
             
             StartCoroutine(DropRoutine(_stratagemEffect, _stratagemEffect.WaitTime, position));
             
-            GameObject beacon = Instantiate(_beaconPrefabs,position,Quaternion.identity);
+            GameObject beacon = Instantiate(_stratagemEffect.BeaconPrefabs,position,Quaternion.identity);
 
             if (beacon.TryGetComponent<MeshRenderer>(out var meshRenderer))
             {
@@ -73,11 +72,10 @@ public class Stratagem : MonoBehaviour
         }
     }
 
-    [SerializeField] private DropSupply _dropObject;
     private IEnumerator DropRoutine(StratagemEffect effect, float waittime, Vector3 position)
     {
         yield return new WaitForSeconds(waittime);
-        DropSupply drop = Instantiate(_dropObject, new Vector3(position.x, 30, position.z), Quaternion.identity);
+        DropSupply drop = Instantiate(_stratagemEffect.DropObject, new Vector3(position.x, 30, position.z), Quaternion.identity);
         drop.SetEffect(effect,position);
     }
 }
