@@ -74,7 +74,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (_currentHealth <= 0)
         {
             _isDead = true;
-            EnemyStateMachine.ChangeState(EnemyDeadState);    
+            EnemyStateMachine.ChangeState(EnemyDeadState);
+            MissionManager.Instance.KillEnemy();
         }
     }
     
