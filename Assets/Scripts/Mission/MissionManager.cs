@@ -10,18 +10,11 @@ public class MissionManager : MonoBehaviour
     
     [SerializeField] private int _enemyGoalCount;
     [SerializeField] private int _currentKillCount;
-
-    //[SerializeField] private TextMeshProUGUI _missonText;
-    
     
     [SerializeField] private GameObject _escapeBeacon;
     [SerializeField] private bool _isEscape;
     
     [SerializeField] EnemyBase[]  _enemies;
-
-    [Header("처치 미션")]
-    [SerializeField] private TextMeshProUGUI _enemyCountText;
-    [SerializeField] private Image _checkImage;
     private void Awake() => Instance = this;
     
     private void Start()
@@ -38,7 +31,7 @@ public class MissionManager : MonoBehaviour
         
         if (_currentKillCount >= _enemyGoalCount)
         {
-            _checkImage.enabled = true;
+            UIManager.Instance.CheckImage.enabled = true;
             EscapeRoutine();
         }
     }
@@ -59,6 +52,6 @@ public class MissionManager : MonoBehaviour
 
     private void UpdateText()
     {
-        _enemyCountText.text = $"{_currentKillCount} / {_enemyGoalCount}";
+        UIManager.Instance.EnemyCountText.text = $"{_currentKillCount} / {_enemyGoalCount}";
     }
 }

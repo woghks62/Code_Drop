@@ -136,6 +136,7 @@ public class PlayerStratagem : MonoBehaviour
         _rigidStratagem.useGravity = true;
         _playerShooter.HasStratagem = false;
         _currentStratagem = null;
+        GameManager.Instance.GameData.UseStratagemCount++;
     }
 
     private void OnUpButtonDown(InputAction.CallbackContext context)
