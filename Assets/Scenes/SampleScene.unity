@@ -1051,7 +1051,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MissonManager
   _enemyGoalCount: 60
   _currentKillCount: 0
-  _escapeObject: {fileID: 1906868770782385294, guid: 2f92fbe0b024ad34da07c81d9b8aa12d, type: 3}
+  _escapeBeacon: {fileID: 3183532463218724055, guid: 5b9a3804f4176d342896c7d6e1a8130b, type: 3}
+  _isEscape: 0
   _enemies: []
   _enemyCountText: {fileID: 2122066099}
   _checkImage: {fileID: 602034458}

@@ -14,7 +14,7 @@ public class MissionManager : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI _missonText;
     
     
-    [SerializeField] private GameObject _escapeObject;
+    [SerializeField] private GameObject _escapeBeacon;
     [SerializeField] private bool _isEscape;
     
     [SerializeField] EnemyBase[]  _enemies;
@@ -39,17 +39,16 @@ public class MissionManager : MonoBehaviour
         if (_currentKillCount >= _enemyGoalCount)
         {
             _checkImage.enabled = true;
-            StartCoroutine(EscapeRoutine());
+            EscapeRoutine();
         }
     }
 
-    private IEnumerator EscapeRoutine()
+    private void EscapeRoutine()
     {
         _isEscape = true;
         Debug.Log("임무 완료 탈출을 준비하세요");
-        yield return new WaitForSeconds(60);
         
-        Instantiate(_escapeObject, _escapeObject.transform.position, _escapeObject.transform.rotation);
+        Instantiate(_escapeBeacon, _escapeBeacon.transform.position, _escapeBeacon.transform.rotation);
     }
 
     public void KillEnemy()
