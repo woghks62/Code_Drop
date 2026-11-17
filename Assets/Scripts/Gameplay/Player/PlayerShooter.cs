@@ -15,6 +15,7 @@ public class PlayerShooter : MonoBehaviour
     
     [SerializeField] private bool _isReloading;
     [SerializeField] private bool _hasStratagem;
+    private Animator _animator;
     public bool HasStratagem
     {
         get => _hasStratagem;
@@ -75,6 +76,7 @@ public class PlayerShooter : MonoBehaviour
         Debug.Log("재장전 멈춤");
         StopCoroutine("ReloadRoutine");
         _isReloading = false;
+        _animator.SetBool("IsReloading", false);
     }
 
     public void SetCahngeWaeponData(Gun gun, int capacity, int spareMagazine)
@@ -92,11 +94,9 @@ public class PlayerShooter : MonoBehaviour
     
     private void Fire()
     {
-        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread);
-        Vector3 spread = spredDirection + _firePoint.position;
-        Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
+        _animator.SetBool("IsFiring", true);
+        Bullet bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
         bullet.Damage = _damage;
-        //Debug.Log(bullet.Damage);
         _guncapacity--;
         _time = 0f;
     }
@@ -109,7 +109,6 @@ public class PlayerShooter : MonoBehaviour
             Vector3 spread = spredDirection + _firePoint.position;
             Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
             bullet.Damage = _damage;    
-            //Debug.Log(bullet.Damage);
         }
         _guncapacity--;
         _time = 0f;
@@ -121,7 +120,6 @@ public class PlayerShooter : MonoBehaviour
         Vector3 spread = spredDirection + _firePoint.position;
         Bullet bullet = Instantiate(_sniperbulletPrefab, spread, _firePoint.rotation);
         bullet.Damage = _damage;
-        //Debug.Log(bullet.Damage);
         _guncapacity--;
         _time = 0f;
     }
@@ -143,6 +141,7 @@ public class PlayerShooter : MonoBehaviour
     private void OnMouseLeftButtonUp(InputAction.CallbackContext context)
     {
         _isShooting = false;
+        _animator.SetBool("IsFiring", false);
     }
 
     private void OnReloadButtonDown(InputAction.CallbackContext context)
@@ -162,6 +161,7 @@ public class PlayerShooter : MonoBehaviour
     private IEnumerator ReloadRoutine()
     {
         Debug.Log("장전 시작");
+        _animator.SetBool("IsReloading", true);
         _isReloading = true;
         yield return new WaitForSeconds(_reloadTime);
         
@@ -169,6 +169,7 @@ public class PlayerShooter : MonoBehaviour
         _spareMagazine--;
         Debug.Log("장전 완료");
         _isReloading = false;
+        _animator.SetBool("IsReloading", false);
     }
     
     private void BindInputEvents()
@@ -192,6 +193,7 @@ public class PlayerShooter : MonoBehaviour
     private void CacheComponents()
     {
         _gun = GetComponentInChildren<Gun>();
+        _animator = GetComponentInChildren<Animator>();
         Debug.Log($"장착한 무기 : {_gun.Stats.Name}");
     }
     
