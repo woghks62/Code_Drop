@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
 
     public void MissionClear()
     {
+        Time.timeScale = 0;
         _gameEndPanel.SetActive(true);
         _clearText.SetActive(true);
         _failText.SetActive(false);
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
 
     public void MissionFail()
     {
+        Time.timeScale = 0;
         _gameEndPanel.SetActive(true);
         _clearText.SetActive(false);
         _failText.SetActive(true);
