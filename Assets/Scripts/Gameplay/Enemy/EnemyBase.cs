@@ -44,7 +44,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public List<Transform> PatroltransfomList => Patroltransfom;
     public bool IsAttack { get => _isAttack; set => _isAttack = value; }
     public bool SeeTarget { get => _seeTarget; set => _seeTarget = value; }
-    public GameObject Target => _target;
+    public GameObject Target {get => _target; set => _target = value; }
     public bool IsDead => _isDead;
     public float Movespeed => _moveSpeed;
     

@@ -40,7 +40,23 @@ public class MeleeEnemy : EnemyBase
             return;
         }
 
-        if (Target != null)
+        if (GameManager.Instance.GameData.IsCallEscape)
+        {
+            if (Target == null)
+            {
+                Target = FindAnyObjectByType<PlayerHealth>().gameObject;
+            }
+            
+            if ((Target.transform.position - transform.position).magnitude < AttackRange)
+            {
+                EnemyStateMachine.ChangeState(MeleeAttackState);
+            }
+            else
+            {
+                EnemyStateMachine.ChangeState(MeleeChaseState);    
+            }
+        }
+        else if (Target != null)
         {
             if ((Target.transform.position - transform.position).magnitude < AttackRange)
             {
@@ -52,6 +68,7 @@ public class MeleeEnemy : EnemyBase
                 IsAttack = false;
             }
         }
+        
         
         EnemyStateMachine.Execute();
     }

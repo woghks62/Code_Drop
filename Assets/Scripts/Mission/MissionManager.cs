@@ -20,6 +20,7 @@ public class MissionManager : MonoBehaviour
     private void Start()
     {
         UpdateText();
+        GameManager.Instance.GameData.IsCallEscape = false;
     }
 
     private void Update()

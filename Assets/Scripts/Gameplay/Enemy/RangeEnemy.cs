@@ -24,8 +24,24 @@ public class RangeEnemy : EnemyBase
         {
             return;
         }
-
-        if (Target != null)
+        
+        if (GameManager.Instance.GameData.IsCallEscape)
+        {
+            if (Target == null)
+            {
+                Target = FindAnyObjectByType<PlayerHealth>().gameObject;
+            }
+            
+            if ((Target.transform.position - transform.position).magnitude < AttackRange)
+            {
+                EnemyStateMachine.ChangeState(RangeAttackState);
+            }
+            else
+            {
+                EnemyStateMachine.ChangeState(RangeChaseState);    
+            }
+        }
+        else if (Target != null)
         {
             if ((Target.transform.position - transform.position).magnitude < AttackRange && SeeTarget)
             {

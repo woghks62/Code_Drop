@@ -30,6 +30,7 @@ public class EscapeBeacon : MonoBehaviour
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
                 _escapeLight.SetActive(true);
+                GameManager.Instance.GameData.IsCallEscape = true;
                 StartCoroutine(EscapeRoutine());   
             }
         }
