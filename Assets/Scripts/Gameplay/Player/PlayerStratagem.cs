@@ -22,6 +22,9 @@ public class PlayerStratagem : MonoBehaviour
     [SerializeField] private Transform _handTransform;
     
     private PlayerShooter _playerShooter;
+    
+    public string Code => _code;
+    
     private void Awake() => _playerShooter = GetComponent<PlayerShooter>();
 
     private void Start()
@@ -133,6 +136,7 @@ public class PlayerStratagem : MonoBehaviour
         _rigidStratagem.useGravity = true;
         _playerShooter.HasStratagem = false;
         _currentStratagem = null;
+        GameManager.Instance.GameData.UseStratagemCount++;
     }
 
     private void OnUpButtonDown(InputAction.CallbackContext context)

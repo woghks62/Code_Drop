@@ -75,6 +75,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         {
             _isDead = true;
             EnemyStateMachine.ChangeState(EnemyDeadState);
+            GameManager.Instance.GameData.KillCount++;
             MissionManager.Instance.KillEnemy();
         }
     }

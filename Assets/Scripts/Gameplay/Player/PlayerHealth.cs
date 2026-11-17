@@ -31,5 +31,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Die()
     {
         Debug.Log("Die 실행");
+        UIManager.Instance.MissionFail();
     }
 }
