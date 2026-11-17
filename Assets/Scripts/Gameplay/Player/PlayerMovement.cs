@@ -7,6 +7,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _moveSpeed;
 
     [SerializeField] private Vector2 _moveInput;
+    private Animator _animator;
+    
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
 
     private void OnEnable() => BindInputEvents();
 
@@ -24,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     
     private void Move()
     {
+        bool isMoving = _moveInput != Vector2.zero;
+        _animator.SetBool("IsMoving", isMoving);
         Vector3 direction = new Vector3(_moveInput.x, 0f, _moveInput.y);
 
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
