@@ -17,7 +17,7 @@ MonoBehaviour:
   _cooldown: 30
   _useLimit: -1
   _waitTime: 10
-  _icon: {fileID: 7894830337996653214, guid: bc183182b50ff1747a3870d2fab2a7d9, type: 3}
+  _icon: {fileID: 21300000, guid: a54af55f6deec344585c6dc0af80e7c3, type: 3}
   _beaconmaterial: {fileID: 2100000, guid: 726776722cb6a574a8ff2797f9fdc943, type: 2}
   _effect: {fileID: 0}
   _beaconPrefabs: {fileID: 4658472300605470893, guid: e90a269faf13d0a4a972080a2c000841, type: 3}

@@ -16,7 +16,7 @@ public class PlayerStratagem : MonoBehaviour
     public Stratagem CurrentStratagem => _currentStratagem;
     
     [SerializeField] private string _code;
-
+    
     [SerializeField] private List<Stratagem> _stratagemlist;
     
     [SerializeField] private Transform _handTransform;
@@ -63,11 +63,13 @@ public class PlayerStratagem : MonoBehaviour
 
     private void OnStratagemButtonDown(InputAction.CallbackContext context)
     {
+        UIManager.Instance.OpenStratagemPanel();
         StratagemOpen();
     }
 
     private void OnStratagemButtonUp(InputAction.CallbackContext context)
     {
+        UIManager.Instance.CloseStratagemPanel();
         StratagemClose();
 
         for (int i = 0; i < _stratagemlist.Count; i++)

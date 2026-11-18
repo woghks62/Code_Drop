@@ -9,7 +9,7 @@ public abstract class StratagemEffect : ScriptableObject
     [SerializeField] private float _cooldown;
     [SerializeField] private int _useLimit;
     [SerializeField] private float _waitTime;
-    [SerializeField] private Image _icon;
+    [SerializeField] private Sprite _icon;
     [SerializeField] private Material _beaconmaterial;
     [SerializeField] private StratagemEffect _effect;
     [SerializeField] private GameObject _beaconPrefabs;
@@ -20,7 +20,7 @@ public abstract class StratagemEffect : ScriptableObject
     public float Cooldown => _cooldown;
     public int UseLimit => _useLimit;
     public float WaitTime => _waitTime;
-    public Image Icon => _icon;
+    public Sprite Icon => _icon;
     public Material BeaconMaterial => _beaconmaterial;
     public StratagemEffect Effect => _effect;
     public GameObject BeaconPrefabs => _beaconPrefabs;

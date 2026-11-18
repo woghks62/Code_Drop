@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d13ca4168b842c40b17f75284642c69, type: 3}
   m_Name: PistolStats
   m_EditorClassIdentifier: Assembly-CSharp::GunStats
-  _id: 0
-  _name: 
-  _damage: 0
-  _framingInterval: 0
-  _capacity: 0
-  _spareMagazine: 0
-  _reloadTime: 0
-  _bulletSpread: 0
+  _id: 4
+  _name: Pistol
+  _damage: 20
+  _framingInterval: 0.15
+  _capacity: 15
+  _spareMagazine: -1
+  _reloadTime: 1.5
+  _bulletSpread: 3
+  _gunSprite: {fileID: 21300000, guid: c2b911a41a9e09b41850f2bc3ce85ef1, type: 3}
