@@ -20,3 +20,4 @@ MonoBehaviour:
   _spareMagazine: 0
   _reloadTime: 0
   _bulletSpread: 0
+  _gunSprite: {fileID: 21300000, guid: 4fc4ee8eba0cb6e4ebd73021bad4c06f, type: 3}

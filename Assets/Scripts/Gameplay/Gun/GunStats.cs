@@ -11,6 +11,7 @@ public class GunStats : ScriptableObject
     [SerializeField] private int _spareMagazine;
     [SerializeField] private float _reloadTime;
     [SerializeField] private float _bulletSpread;
+    [SerializeField] private Sprite _gunSprite;
     
     public int Id => _id;
     public string Name => _name;
@@ -20,6 +21,7 @@ public class GunStats : ScriptableObject
     public int SpareMagazine => _spareMagazine;
     public float ReloadTime => _reloadTime;
     public float BulletSpread => _bulletSpread;
+    public Sprite GunSprite => _gunSprite;
 
     public void SetData(
         int id, string name, int damage, float framingInterval,
