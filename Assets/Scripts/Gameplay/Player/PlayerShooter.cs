@@ -171,7 +171,7 @@ public class PlayerShooter : MonoBehaviour
         Debug.Log("장전 완료");
         _isReloading = false;
         _animator.SetBool("IsReloading", false);
-        UIManager.Instance.ReloadMagazine(_spareMagazine);
+        UIManager.Instance.ChangeMagazine(_spareMagazine);
         UIManager.Instance.UseMagazine(_gun, _guncapacity);
     }
     

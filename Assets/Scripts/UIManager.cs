@@ -169,7 +169,7 @@ public class UIManager : MonoBehaviour
         _remaining2.text = $"Remaining : {text2}";
     }
 
-    public void ReloadMagazine(int magazine)
+    public void ChangeMagazine(int magazine)
     {
         if (magazine < 0)
         {

@@ -44,6 +44,7 @@ public class EscapeBeacon : MonoBehaviour
         _waitTimer.text = _waitTime.ToString("0");
     }
 
+    [SerializeField] private int index =0;
     private void OnTriggerStay(Collider other)
     {
         if (_isPlaneCall)
@@ -57,6 +58,41 @@ public class EscapeBeacon : MonoBehaviour
             {
                 _escapeCode.SetActive(true);
             }
+
+            /*
+            // 플레이어스트라타잼이 있을때만 조건 통과
+            if (other.GetComponent<PlayerStratagem>().Code != null)
+            {
+                // 탈출코드와 플레이어스트라타잼 코드 비교 후 같은 인덱스 번호가 같으면
+                if (_escapeBeaconCode[index] == other.GetComponent<PlayerStratagem>().Code[index])
+                {
+                    _imagelists[index].color = Color.green;
+                    index++;
+                }
+                // 탈출 코드와 플레이어 스트라타잼 코드가 다르면
+                else
+                {
+                    // 근데 다른데 탈출코드 0번째와 인덱스번호의 틀린 코드가 같으면
+                    if (_escapeBeaconCode[0] == other.GetComponent<PlayerStratagem>().Code[index])
+                    {
+                        for (int i = 0; i < index; i++)
+                        {
+                            _imagelists[index].color = Color.white;
+                        }
+                        _imagelists[0].color = Color.green;
+                        index = 1;
+                    }
+                    // 탈출코드 0번째와 입력한 코드도 다르다면
+                    else
+                    {
+                        for (int i = 0; i < index; i++)
+                        {
+                            _imagelists[index].color = Color.white;
+                        }
+                        index = 0;
+                    }
+                }
+            }*/
             
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
