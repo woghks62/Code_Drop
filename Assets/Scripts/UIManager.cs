@@ -24,16 +24,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _downarrowSprite;
     [SerializeField] private Sprite _leftarrowSprite;
     [SerializeField] private Sprite _rightarrowSprite;
-    
-    [Header("Stratagem1")]
+
+    [Header("Stratagem1")] 
+    [SerializeField] private Stratagem _stratagem1;
     [SerializeField] private Image _stratagemIcon1;
     [SerializeField] private Image[] _stratagemCodelists;
-    [SerializeField] private TextMeshProUGUI _coolTime;
-    [SerializeField] private TextMeshProUGUI _remaining;
+    [SerializeField] private TextMeshProUGUI _coolTime1;
+    [SerializeField] private TextMeshProUGUI _remaining1;
     
     [Header("Stratagem2")]
+    [SerializeField] private Stratagem _stratagem2;
     [SerializeField] private Image _stratagemIcon2;
     [SerializeField] private Image[] _stratagemCodelists2;
+    [SerializeField] private TextMeshProUGUI _coolTime2;
+    [SerializeField] private TextMeshProUGUI _remaining2;
 
     [Header("Weapon Panel")] 
     [SerializeField] private Image _currentGunIcon;
@@ -126,6 +130,38 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         GameManager.Instance.GameData.PlayTime += Time.deltaTime;
+        StratagemPanelUI();
+    }
+    
+    private float time1;
+    private float time2;
+    private string text1;
+    private string text2;
+    
+    private void StratagemPanelUI()
+    {
+        if (_stratagemPanel == null) return;
+        
+        time1 = _stratagem1.StratagemEffect.Cooldown - _stratagem1.CoolTime < 0 
+            ? 0 : _stratagem1.StratagemEffect.Cooldown - _stratagem1.CoolTime;
+        
+        time2 = _stratagem2.StratagemEffect.Cooldown - _stratagem2.CoolTime < 0 
+            ? 0 : _stratagem2.StratagemEffect.Cooldown - _stratagem2.CoolTime;
+        
+        if (_stratagem1.StratagemEffect.UseLimit - _stratagem1.UseCount < 0)
+            text1 = "Unlimited";
+        else
+            text1 = (_stratagem1.StratagemEffect.UseLimit - _stratagem1.UseCount).ToString();
+        
+        if (_stratagem2.StratagemEffect.UseLimit - _stratagem2.UseCount < 0)  
+            text2 = "Unlimited";
+        else 
+            text2 = (_stratagem2.StratagemEffect.UseLimit - _stratagem2.UseCount).ToString();
+        
+        _coolTime1.text = $"CoolTime : {time1:F2}";
+        _remaining1.text = $"Remaining : {text1}";
+        _coolTime2.text =  $"CoolTime : {time2:F2}";
+        _remaining2.text = $"Remaining : {text2}";
     }
 
     public void ReloadMagazine(int magazine)
