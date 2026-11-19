@@ -1,14 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     private const int MAX_HEALTH = 100;
     
     [SerializeField] private int _currentHealth;
+    [SerializeField] private Image _healthBar;
 
     private void Start()
     {
         _currentHealth = MAX_HEALTH;
+    }
+
+    private void Update()
+    {
+        _healthBar.fillAmount = (float)_currentHealth / MAX_HEALTH;
     }
     
     public void TakeDamage(int damage)
