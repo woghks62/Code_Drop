@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EscapeBeacon : MonoBehaviour
 {
@@ -16,11 +18,16 @@ public class EscapeBeacon : MonoBehaviour
 
     [SerializeField] private bool _isPlaneCall;
 
+    [SerializeField] private GameObject _escapeCode;
+    [SerializeField] private Image[] _imagelists;
+    
     private void Start()
     {
         _escapeLight.SetActive(false);
         _waitTimer.gameObject.SetActive(false);
         SetBeaconCode();
+        SetCodeImage();
+        _escapeCode.SetActive(false);
         _waitTime = _escapeArriveTime;
     }
 
@@ -44,8 +51,14 @@ public class EscapeBeacon : MonoBehaviour
         
         if (other.GetComponent<PlayerShooter>() != null)
         {
+            if (!_escapeCode.activeSelf)
+            {
+                _escapeCode.SetActive(true);
+            }
+            
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
+                _escapeCode.SetActive(false);
                 _escapeLight.SetActive(true);
                 _waitTimer.gameObject.SetActive(true);
                 GameManager.Instance.GameData.IsCallEscape = true;
@@ -53,7 +66,7 @@ public class EscapeBeacon : MonoBehaviour
             }
         }
     }
-
+    
     private IEnumerator EscapeRoutine()
     {
         _isPlaneCall = true;
@@ -65,6 +78,29 @@ public class EscapeBeacon : MonoBehaviour
         escapePlane.StartCoroutine(escapePlane.Escape(_escapeTime));
     }
 
+    private void SetCodeImage()
+    {
+        for (int i = 0; i < _escapeBeaconCode.Length; i++)
+        {
+            if (_escapeBeaconCode[i].ToString() == "1")
+            {
+                _imagelists[i].sprite = UIManager.Instance.UpArrowSprite;
+            }
+            else if (_escapeBeaconCode[i].ToString() == "2")
+            {
+                _imagelists[i].sprite = UIManager.Instance.DownArrowSprite;
+            }
+            else if (_escapeBeaconCode[i].ToString() == "3")
+            {
+                _imagelists[i].sprite = UIManager.Instance.LeftArrowSprite;
+            }
+            else if (_escapeBeaconCode[i].ToString() == "4")
+            {
+                _imagelists[i].sprite = UIManager.Instance.RightArrowSprite;
+            }
+        }
+    }
+    
     private void SetBeaconCode()
     {
         for (int i = 0; i < 6; i++)

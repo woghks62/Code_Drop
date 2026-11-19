@@ -24,6 +24,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _downarrowSprite;
     [SerializeField] private Sprite _leftarrowSprite;
     [SerializeField] private Sprite _rightarrowSprite;
+    
+    public Sprite UpArrowSprite => _uparrowSprite;
+    public Sprite DownArrowSprite => _downarrowSprite;
+    public Sprite LeftArrowSprite => _leftarrowSprite;
+    public Sprite RightArrowSprite => _rightarrowSprite;
 
     [Header("Stratagem1")] 
     [SerializeField] private Stratagem _stratagem1;
