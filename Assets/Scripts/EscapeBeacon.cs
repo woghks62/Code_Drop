@@ -21,6 +21,8 @@ public class EscapeBeacon : MonoBehaviour
     [SerializeField] private GameObject _escapeCode;
     [SerializeField] private Image[] _imagelists;
     
+    [SerializeField] private MeshRenderer _meshRenderer;
+    
     private void Start()
     {
         _escapeLight.SetActive(false);
@@ -58,6 +60,7 @@ public class EscapeBeacon : MonoBehaviour
             
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
+                _meshRenderer.enabled = false;
                 _escapeCode.SetActive(false);
                 _escapeLight.SetActive(true);
                 _waitTimer.gameObject.SetActive(true);
