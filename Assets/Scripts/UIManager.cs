@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
     [Header("Stratagem1")]
     [SerializeField] private Image _stratagemIcon1;
     [SerializeField] private Image[] _stratagemCodelists;
+    [SerializeField] private TextMeshProUGUI _coolTime;
+    [SerializeField] private TextMeshProUGUI _remaining;
     
     [Header("Stratagem2")]
     [SerializeField] private Image _stratagemIcon2;
@@ -37,6 +39,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _currentGunIcon;
     [SerializeField] private TextMeshProUGUI _currentGunMagazine;
     [SerializeField] private Image _currentGunCapacity;
+    [SerializeField] private Image _choiceStratagemImage1;
+    [SerializeField] private Image _choiceStratagemImage2;
     
 
     public Image CheckImage { get => _checkImage; set => _checkImage = value; }
@@ -107,6 +111,7 @@ public class UIManager : MonoBehaviour
         CheckImage.enabled = false;
     }
 
+    private float cool;
     private void Start()
     {
         GameManager.Instance.GameData.KillCount = 0;
@@ -114,6 +119,8 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.GameData.PlayTime = 0f;
         StratagemImage();
         CloseStratagemPanel();
+        _choiceStratagemImage1.sprite = GameManager.Instance.GameData.StratagemEffectList[0].Icon;
+        _choiceStratagemImage2.sprite = GameManager.Instance.GameData.StratagemEffectList[1].Icon;
     }
 
     private void Update()
