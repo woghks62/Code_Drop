@@ -28,14 +28,9 @@ public class CallStratagemUI : MonoBehaviour
         int milliseconds = Mathf.FloorToInt((time * 100f) % 100f);
         
         _remainingTime.text = $"{string.Format("{0:00}:{1:00}", seconds,milliseconds)}";
+        if (time <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
-/*
-     [SerializeField] private CallStratagemUI _callStratagemUI;
-    [SerializeField] private Transform _panelParent;
-    
- 
-CallStratagemUI callStratagemUI = Instantiate(_callStratagemUI);
-callStratagemUI.gameObject.transform.SetParent(_panelParent);
-callStratagemUI.StratagemEffect = _stratagemlist[i].StratagemEffect;
-*/
