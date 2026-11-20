@@ -21210,6 +21210,7 @@ GameObject:
   - component: {fileID: 428537330}
   - component: {fileID: 428537332}
   - component: {fileID: 428537331}
+  - component: {fileID: 428537333}
   m_Layer: 5
   m_Name: StratagemPanel1
   m_TagString: Untagged
@@ -21278,6 +21279,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428537329}
   m_CullTransparentMesh: 1
+--- !u!114 &428537333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428537329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2358226fe57092b488d7f3e1992e6a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StratagemUI
+  _stratagemPanel: {fileID: 289270941}
+  _stratagem: {fileID: 486161527}
+  _stratagemIcon: {fileID: 1958257919}
+  _stratagemCodelists:
+  - {fileID: 739958212}
+  - {fileID: 189139148}
+  - {fileID: 2145022877}
+  - {fileID: 772088338}
+  - {fileID: 1723136795}
+  - {fileID: 2006974452}
+  _coolTime: {fileID: 447511326}
+  _remaining: {fileID: 1246375746}
 --- !u!1001 &428716575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46967,7 +46992,7 @@ GameObject:
   - component: {fileID: 917543586}
   - component: {fileID: 917543585}
   m_Layer: 5
-  m_Name: Stratagem1Remaining
+  m_Name: Stratagem2Remaining
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57141,7 +57166,7 @@ GameObject:
   - component: {fileID: 1107138489}
   - component: {fileID: 1107138488}
   m_Layer: 5
-  m_Name: Stratagem1CoolTime
+  m_Name: Stratagem2CoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62002,28 +62027,6 @@ MonoBehaviour:
   _downarrowSprite: {fileID: 21300000, guid: adb9ece82f1944b2aa3818b8f8fa8991, type: 3}
   _leftarrowSprite: {fileID: 21300000, guid: b54bf609fdd264ee9850b4fd480a5a1d, type: 3}
   _rightarrowSprite: {fileID: 21300000, guid: e2b1f5edf02d645769d2521205aa58a8, type: 3}
-  _stratagem1: {fileID: 486161527}
-  _stratagemIcon1: {fileID: 1958257919}
-  _stratagemCodelists:
-  - {fileID: 739958212}
-  - {fileID: 189139148}
-  - {fileID: 2145022877}
-  - {fileID: 772088338}
-  - {fileID: 1723136795}
-  - {fileID: 2006974452}
-  _coolTime1: {fileID: 447511326}
-  _remaining1: {fileID: 1246375746}
-  _stratagem2: {fileID: 2022946809}
-  _stratagemIcon2: {fileID: 653205167}
-  _stratagemCodelists2:
-  - {fileID: 918929737}
-  - {fileID: 564992119}
-  - {fileID: 1822462859}
-  - {fileID: 143524120}
-  - {fileID: 1739459111}
-  - {fileID: 1089578560}
-  _coolTime2: {fileID: 1107138488}
-  _remaining2: {fileID: 917543585}
   _currentGunIcon: {fileID: 551227529}
   _currentGunMagazine: {fileID: 791703384}
   _currentGunCapacity: {fileID: 871951167}
@@ -97979,6 +97982,7 @@ GameObject:
   - component: {fileID: 1875428534}
   - component: {fileID: 1875428536}
   - component: {fileID: 1875428535}
+  - component: {fileID: 1875428537}
   m_Layer: 5
   m_Name: StratagemPanel2
   m_TagString: Untagged
@@ -98047,6 +98051,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875428533}
   m_CullTransparentMesh: 1
+--- !u!114 &1875428537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875428533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2358226fe57092b488d7f3e1992e6a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StratagemUI
+  _stratagemPanel: {fileID: 289270941}
+  _stratagem: {fileID: 2022946809}
+  _stratagemIcon: {fileID: 653205167}
+  _stratagemCodelists:
+  - {fileID: 918929737}
+  - {fileID: 564992119}
+  - {fileID: 1822462859}
+  - {fileID: 143524120}
+  - {fileID: 1739459111}
+  - {fileID: 1089578560}
+  _coolTime: {fileID: 1107138488}
+  _remaining: {fileID: 917543585}
 --- !u!1001 &1876624600
 PrefabInstance:
   m_ObjectHideFlags: 0

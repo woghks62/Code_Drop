@@ -26,20 +26,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _leftarrowSprite;
     [SerializeField] private Sprite _rightarrowSprite;
     
-    [Header("Stratagem1")] 
-    [SerializeField] private Stratagem _stratagem1;
-    [SerializeField] private Image _stratagemIcon1;
-    [SerializeField] private Image[] _stratagemCodelists;
-    [SerializeField] private TextMeshProUGUI _coolTime1;
-    [SerializeField] private TextMeshProUGUI _remaining1;
-    
-    [Header("Stratagem2")]
-    [SerializeField] private Stratagem _stratagem2;
-    [SerializeField] private Image _stratagemIcon2;
-    [SerializeField] private Image[] _stratagemCodelists2;
-    [SerializeField] private TextMeshProUGUI _coolTime2;
-    [SerializeField] private TextMeshProUGUI _remaining2;
-
     [Header("Weapon Panel")] 
     [SerializeField] private Image _currentGunIcon;
     [SerializeField] private TextMeshProUGUI _currentGunMagazine;
@@ -65,53 +51,6 @@ public class UIManager : MonoBehaviour
     {
         _stratagemPanel.SetActive(false);
     }
-    private void StratagemImage()
-    {
-        _stratagemIcon1.sprite = GameManager.Instance.GameData.StratagemEffectList[0].Icon;
-        _stratagemIcon2.sprite = GameManager.Instance.GameData.StratagemEffectList[1].Icon;
-        
-        for (int i = 0; i < GameManager.Instance.GameData.StratagemEffectList[0].Code.Length; i++)
-        {
-            _stratagemCodelists[i].gameObject.SetActive(true);
-            if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "1")
-            {
-                _stratagemCodelists[i].sprite = _uparrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "2")
-            {
-                _stratagemCodelists[i].sprite = _downarrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "3")
-            {
-                _stratagemCodelists[i].sprite = _leftarrowSprite;
-            }
-            else if(GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "4")
-            {
-                _stratagemCodelists[i].sprite = _rightarrowSprite;
-            }
-        }
-        
-        for (int i = 0; i < GameManager.Instance.GameData.StratagemEffectList[1].Code.Length; i++)
-        {
-            _stratagemCodelists2[i].gameObject.SetActive(true);
-            if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "1")
-            {
-                _stratagemCodelists2[i].sprite = _uparrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "2")
-            {
-                _stratagemCodelists2[i].sprite = _downarrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "3")
-            {
-                _stratagemCodelists2[i].sprite = _leftarrowSprite;
-            }
-            else if(GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "4")
-            {
-                _stratagemCodelists2[i].sprite = _rightarrowSprite;
-            }
-        }
-    }
     
     private void Awake()
     {
@@ -126,7 +65,6 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.GameData.KillCount = 0;
         GameManager.Instance.GameData.UseStratagemCount = 0;
         GameManager.Instance.GameData.PlayTime = 0f;
-        StratagemImage();
         CloseStratagemPanel();
         _choiceStratagemImage1.sprite = GameManager.Instance.GameData.StratagemEffectList[0].Icon;
         _choiceStratagemImage2.sprite = GameManager.Instance.GameData.StratagemEffectList[1].Icon;
@@ -135,40 +73,9 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         GameManager.Instance.GameData.PlayTime += Time.deltaTime;
-        StratagemPanelUI();
     }
     
-    private float time1;
-    private float time2;
-    private string text1;
-    private string text2;
     
-    private void StratagemPanelUI()
-    {
-        if (_stratagemPanel == null) return;
-        
-        time1 = _stratagem1.StratagemEffect.Cooldown - _stratagem1.CoolTime < 0 
-            ? 0 : _stratagem1.StratagemEffect.Cooldown - _stratagem1.CoolTime;
-        
-        time2 = _stratagem2.StratagemEffect.Cooldown - _stratagem2.CoolTime < 0 
-            ? 0 : _stratagem2.StratagemEffect.Cooldown - _stratagem2.CoolTime;
-        
-        if (_stratagem1.StratagemEffect.UseLimit - _stratagem1.UseCount < 0)
-            text1 = "Unlimited";
-        else
-            text1 = (_stratagem1.StratagemEffect.UseLimit - _stratagem1.UseCount).ToString();
-        
-        if (_stratagem2.StratagemEffect.UseLimit - _stratagem2.UseCount < 0)  
-            text2 = "Unlimited";
-        else 
-            text2 = (_stratagem2.StratagemEffect.UseLimit - _stratagem2.UseCount).ToString();
-        
-        _coolTime1.text = $"CoolTime : {time1:F2}";
-        _remaining1.text = $"Remaining : {text1}";
-        _coolTime2.text =  $"CoolTime : {time2:F2}";
-        _remaining2.text = $"Remaining : {text2}";
-    }
-
     public void ChangeMagazine(int magazine)
     {
         if (magazine < 0)
