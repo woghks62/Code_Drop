@@ -13,9 +13,8 @@ public class Stratagem : MonoBehaviour
     [SerializeField] private bool _canExecute;
     [SerializeField] private float _cooltime;
     
-    // [SerializeField] private GameObject _uiprefabs;
-    // [SerializeField] private GameObject _canvas;
-    
+    [SerializeField] private CallStratagemUI _callStratagemUI;
+    [SerializeField] private Transform _panelParent;
     
     public StratagemEffect StratagemEffect {get => _stratagemEffect; set => _stratagemEffect = value; }
     public GameObject Child {get => _child; set => _child = value; }
@@ -74,6 +73,10 @@ public class Stratagem : MonoBehaviour
 
     private IEnumerator DropRoutine(StratagemEffect effect, float waittime, Vector3 position)
     {
+        CallStratagemUI callStratagemUI = Instantiate(_callStratagemUI);
+        callStratagemUI.gameObject.transform.SetParent(_panelParent);
+        callStratagemUI.StratagemEffect = effect;
+        
         yield return new WaitForSeconds(waittime);
         DropSupply drop = Instantiate(_stratagemEffect.DropObject, new Vector3(position.x, 30, position.z), Quaternion.identity);
         drop.SetEffect(effect,position);
