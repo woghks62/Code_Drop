@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _enemyCountText;
     [SerializeField] private Image _checkImage;
     
+    [Header("게임 종료 결과창")]
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _clearText;
     [SerializeField] private GameObject _failText;
@@ -25,11 +26,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _leftarrowSprite;
     [SerializeField] private Sprite _rightarrowSprite;
     
-    public Sprite UpArrowSprite => _uparrowSprite;
-    public Sprite DownArrowSprite => _downarrowSprite;
-    public Sprite LeftArrowSprite => _leftarrowSprite;
-    public Sprite RightArrowSprite => _rightarrowSprite;
-
     [Header("Stratagem1")] 
     [SerializeField] private Stratagem _stratagem1;
     [SerializeField] private Image _stratagemIcon1;
@@ -51,6 +47,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _choiceStratagemImage1;
     [SerializeField] private Image _choiceStratagemImage2;
     
+     public Sprite UpArrowSprite => _uparrowSprite;
+     public Sprite DownArrowSprite => _downarrowSprite;
+     public Sprite LeftArrowSprite => _leftarrowSprite;
+     public Sprite RightArrowSprite => _rightarrowSprite;
 
     public Image CheckImage { get => _checkImage; set => _checkImage = value; }
     public TextMeshProUGUI EnemyCountText { get => _enemyCountText; set => _enemyCountText = value; }
