@@ -52,14 +52,27 @@ public class EscapeBeacon : MonoBehaviour
             return;
         }
         
-        if (other.GetComponent<PlayerShooter>() != null)
+        if (other.TryGetComponent<PlayerShooter>(out PlayerShooter playerShooter))
         {
+            if (playerShooter.gameObject.TryGetComponent<PlayerStratagem>(out PlayerStratagem playerStratagem))
+            {
+                if (!playerStratagem.PushCodeButtonDown)
+                {
+                    ResetBeaconCode();
+                    playerStratagem.Code = null;
+                    index = 0;
+                }
+            }
             if (!_escapeCode.activeSelf)
             {
                 _escapeCode.SetActive(true);
             }
 
-            /*
+            if (other.TryGetComponent<PlayerStratagem>(out PlayerStratagem player))
+            {
+                player.IsInEscapeBeacon =  true;
+            }
+
             // 플레이어스트라타잼이 있을때만 조건 통과
             if (other.GetComponent<PlayerStratagem>().Code != null)
             {
@@ -75,24 +88,29 @@ public class EscapeBeacon : MonoBehaviour
                     // 근데 다른데 탈출코드 0번째와 인덱스번호의 틀린 코드가 같으면
                     if (_escapeBeaconCode[0] == other.GetComponent<PlayerStratagem>().Code[index])
                     {
+                        Debug.Log("틀렸지만 처음 코드랑 같아요");
                         for (int i = 0; i < index; i++)
                         {
-                            _imagelists[index].color = Color.white;
+                            _imagelists[i].color = Color.white;
                         }
+
+                        other.GetComponent<PlayerStratagem>().Code = other.GetComponent<PlayerStratagem>().Code[0].ToString();
                         _imagelists[0].color = Color.green;
                         index = 1;
                     }
                     // 탈출코드 0번째와 입력한 코드도 다르다면
                     else
                     {
+                        Debug.Log("틀렸어요");
                         for (int i = 0; i < index; i++)
                         {
-                            _imagelists[index].color = Color.white;
+                            _imagelists[i].color = Color.white;
+                            other.GetComponent<PlayerStratagem>().Code = null;
                         }
                         index = 0;
                     }
                 }
-            }*/
+            }
             
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
@@ -103,6 +121,25 @@ public class EscapeBeacon : MonoBehaviour
                 GameManager.Instance.GameData.IsCallEscape = true;
                 StartCoroutine(EscapeRoutine());   
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent<PlayerStratagem>(out PlayerStratagem player))
+        {
+            player.IsInEscapeBeacon = false;
+            player.Code = null;
+            index = 0;
+            ResetBeaconCode();
+        }
+    }
+
+    public void ResetBeaconCode()
+    {
+        for (int i = 0; i < _imagelists.Length; i++)
+        {
+            _imagelists[i].color = Color.white;
         }
     }
     
