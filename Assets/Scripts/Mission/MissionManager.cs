@@ -12,6 +12,7 @@ public class MissionManager : MonoBehaviour
     [SerializeField] private int _currentKillCount;
     
     [SerializeField] private GameObject _escapeBeacon;
+    [SerializeField] private Transform _escapeBeaconPosition;
     [SerializeField] private bool _isEscape;
     
     [SerializeField] EnemyBase[]  _enemies;
@@ -42,7 +43,7 @@ public class MissionManager : MonoBehaviour
         _isEscape = true;
         Debug.Log("임무 완료 탈출을 준비하세요");
         
-        Instantiate(_escapeBeacon, _escapeBeacon.transform.position, _escapeBeacon.transform.rotation);
+        Instantiate(_escapeBeacon, _escapeBeaconPosition);
     }
 
     public void KillEnemy()

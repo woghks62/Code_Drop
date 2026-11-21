@@ -13,21 +13,15 @@ public class RangeChaseState : IEnemyState
     {
         Debug.Log("RangeChaseState 진입");
         _rangeEnemy.Animator.SetBool("IsChasing", true);
+        
+        _rangeEnemy.Agent.isStopped = false;
+        _rangeEnemy.Agent.speed = _rangeEnemy.Movespeed;
+        _rangeEnemy.Agent.stoppingDistance = _rangeEnemy.IsWall() ? 1f : _rangeEnemy.AttackRange;
     }
 
     public void Execute()
     {
-        Vector3 direction = _rangeEnemy.Target.transform.position - _rangeEnemy.gameObject.transform.position;
-
-        direction.y = 0f;
-        direction.Normalize();
-        
-        float distance = Vector3.Distance(_rangeEnemy.transform.position, _rangeEnemy.Target.transform.position);
-        if (distance >= 1)
-        {
-            _rangeEnemy.transform.LookAt(_rangeEnemy.Target.transform);
-            _rangeEnemy.transform.position += direction * _rangeEnemy.Movespeed * Time.deltaTime;
-        }
+        _rangeEnemy.Agent.SetDestination(_rangeEnemy.Target.transform.position);
     }
 
     public void Exit()

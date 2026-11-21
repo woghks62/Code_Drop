@@ -15,6 +15,13 @@ public class EnemyPatrolState : IEnemyState
     {
         Debug.Log("Patrol 진입");
         _enemyBase.Animator.SetBool("IsPatrolling", true);
+        
+        _enemyBase.Agent.isStopped = false;
+        _enemyBase.Agent.speed = _enemyBase.Movespeed;
+        _enemyBase.Agent.stoppingDistance = 0.1f;
+
+        _enemyBase.Agent.SetDestination(
+            _enemyBase.PatroltransfomList[_currentPatrolIndex].position);
     }
 
     public void Execute()
@@ -24,19 +31,17 @@ public class EnemyPatrolState : IEnemyState
             return;
         }
         
-        Vector3 _target= _enemyBase.PatroltransfomList[_currentPatrolIndex].transform.position;
-        
-        _enemyBase.transform.LookAt(_target);
-        _enemyBase.transform.position = Vector3.MoveTowards(_enemyBase.transform.position, _target, _enemyBase.Movespeed * Time.deltaTime);
-
-        if (Vector3.Distance(_target, _enemyBase.transform.position) < 0.1f)
+        if (_enemyBase.Agent.remainingDistance <= _enemyBase.Agent.stoppingDistance)
         {
             _currentPatrolIndex++;
-        }
 
-        if (_currentPatrolIndex >= _enemyBase.PatroltransfomList.Count)
-        {
-            _currentPatrolIndex = 0;
+            if (_currentPatrolIndex >= _enemyBase.PatroltransfomList.Count)
+            {
+                _currentPatrolIndex = 0;
+            }
+
+            _enemyBase.Agent.SetDestination(
+                _enemyBase.PatroltransfomList[_currentPatrolIndex].position);
         }
     }
 
@@ -44,5 +49,7 @@ public class EnemyPatrolState : IEnemyState
     {
         Debug.Log("Patrol 나감");
         _enemyBase.Animator.SetBool("IsPatrolling", false);
+        
+        _enemyBase.Agent.ResetPath();
     }
 }
