@@ -40,7 +40,7 @@ public class MeleeEnemy : EnemyBase
             return;
         }
 
-        if (GameManager.Instance.GameData.IsCallEscape)
+        if (GameManager.Instance.GameData.IsCallEscape || IsAttacked)
         {
             if (Target == null)
             {

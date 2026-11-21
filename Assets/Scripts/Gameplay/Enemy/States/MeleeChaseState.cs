@@ -13,26 +13,22 @@ public class MeleeChaseState : IEnemyState
     {
         Debug.Log("Chase 진입");
         _enemyBase.Animator.SetBool("IsChasing", true);
+        
+        _enemyBase.Agent.isStopped = false;
+        _enemyBase.Agent.speed = _enemyBase.Movespeed;
+        _enemyBase.Agent.stoppingDistance = 1f;
     }
 
     public void Execute()
     {
-        Vector3 direction = _enemyBase.Target.transform.position - _enemyBase.gameObject.transform.position;
-
-        direction.y = 0f;
-        direction.Normalize();
-        
-        float distance = Vector3.Distance(_enemyBase.transform.position, _enemyBase.Target.transform.position);
-        if (distance >= 1)
-        {
-            _enemyBase.transform.LookAt(_enemyBase.Target.transform);
-            _enemyBase.transform.position += direction * _enemyBase.Movespeed * Time.deltaTime;
-        }
+        _enemyBase.Agent.SetDestination(_enemyBase.Target.transform.position);
     }
 
     public void Exit()
     {
         Debug.Log("Chase 종료");
         _enemyBase.Animator.SetBool("IsChasing", false);
+        
+        _enemyBase.Agent.ResetPath();
     }
 }

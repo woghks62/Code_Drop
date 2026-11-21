@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class RangeEnemy : EnemyBase
 {
+    [SerializeField] private LayerMask _groundLayer;
+    
     [Header("Enemy 무기 관련")]
     [SerializeField] private Bullet _enemyBullet;
     [SerializeField] private Transform _firePoint;
@@ -25,14 +27,14 @@ public class RangeEnemy : EnemyBase
             return;
         }
         
-        if (GameManager.Instance.GameData.IsCallEscape)
+        if (GameManager.Instance.GameData.IsCallEscape || IsAttacked)
         {
             if (Target == null)
             {
                 Target = FindAnyObjectByType<PlayerHealth>().gameObject;
             }
             
-            if ((Target.transform.position - transform.position).magnitude < AttackRange)
+            if ((Target.transform.position - transform.position).magnitude < AttackRange && !IsWall())
             {
                 EnemyStateMachine.ChangeState(RangeAttackState);
             }
@@ -45,7 +47,14 @@ public class RangeEnemy : EnemyBase
         {
             if ((Target.transform.position - transform.position).magnitude < AttackRange && SeeTarget)
             {
-                EnemyStateMachine.ChangeState(RangeAttackState);
+                if (IsWall())
+                {
+                    EnemyStateMachine.ChangeState(RangeChaseState); 
+                }
+                else
+                {
+                    EnemyStateMachine.ChangeState(RangeAttackState);      
+                }
             }
             else
             {
@@ -55,6 +64,18 @@ public class RangeEnemy : EnemyBase
         }
         
         EnemyStateMachine.Execute();
+    }
+
+    public bool IsWall()
+    {
+        Vector3 targetPosition = Target.GetComponent<Collider>().bounds.center;
+        
+        bool isWall = Physics.Linecast(
+            _firePoint.position,
+            targetPosition,
+            _groundLayer);
+        
+        return isWall;
     }
 
     public void Shoot()

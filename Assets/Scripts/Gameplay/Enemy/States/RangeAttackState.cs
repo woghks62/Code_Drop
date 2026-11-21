@@ -12,6 +12,7 @@ public class RangeAttackState : IEnemyState
     public void Enter()
     {
         Debug.Log("RangeAttack 진입");
+        _rangeEnemy.Agent.isStopped = true;
         _rangeEnemy.Animator.SetBool("IsAttacking", true);
     }
 

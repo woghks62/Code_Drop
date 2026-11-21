@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEditor;  // OnDrawGizmos
 
 public class EnemyBase : MonoBehaviour, IDamageable
@@ -17,6 +18,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] protected Enemy _enemy;
     [SerializeField] private bool _isAttack;
     [SerializeField] private bool _seeTarget;
+    [SerializeField] private bool _isAttacked;
     
     [Header("EnemyStats")]
     [SerializeField] private int _id;
@@ -29,6 +31,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     [SerializeField] private int _damage;
     [SerializeField] private float _attackRange;
     [SerializeField] private float _projectileSpeed;
+    
+    private NavMeshAgent _agent;
+    public NavMeshAgent Agent => _agent;
     
     public int Id => _id;
     public string Name => _name;
@@ -47,6 +52,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public GameObject Target {get => _target; set => _target = value; }
     public bool IsDead => _isDead;
     public float Movespeed => _moveSpeed;
+    public bool IsAttacked => _isAttacked;
     
     public EnemyStateMachine EnemyStateMachine{get; set;}
     public EnemyIdleState EnemyIdleState{get; set;}
@@ -54,11 +60,13 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public EnemyDeadState EnemyDeadState{get; set;}
     
     
+    
     public virtual void Start()
     {
         Init();
         CacheComponents();
         EnemyStateMachine.Initialize(EnemyIdleState);
+        _agent = GetComponent<NavMeshAgent>();
     }
     
     public void SetTarget(GameObject target)
@@ -69,7 +77,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         if (_isDead) return;
-        
+
+        _isAttacked = true;
         _currentHealth = _currentHealth - damage < 0 ? 0 : _currentHealth - damage;
         if (_currentHealth <= 0)
         {

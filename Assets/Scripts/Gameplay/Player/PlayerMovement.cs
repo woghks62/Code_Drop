@@ -8,17 +8,20 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Vector2 _moveInput;
     private Animator _animator;
+    private Rigidbody _rigidbody;
     
     private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
+        _rigidbody =  GetComponent<Rigidbody>();
     }
 
     private void OnEnable() => BindInputEvents();
 
     private void Update()
     {
-        Move();
+        bool isMoving = _moveInput != Vector2.zero;
+        _animator.SetBool("IsMoving", isMoving);
     }
 
     private void OnDisable() => UnBindInputEvents();
@@ -28,13 +31,15 @@ public class PlayerMovement : MonoBehaviour
         _moveInput = context.ReadValue<Vector2>();
     }
     
-    private void Move()
+    private void FixedUpdate()
     {
-        bool isMoving = _moveInput != Vector2.zero;
-        _animator.SetBool("IsMoving", isMoving);
         Vector3 direction = new Vector3(_moveInput.x, 0f, _moveInput.y);
+        direction = Vector3.ClampMagnitude(direction, 1f);
 
-        transform.Translate(direction * _moveSpeed * Time.deltaTime);
+        Vector3 velocity = direction * _moveSpeed;
+        velocity.y = _rigidbody.linearVelocity.y;
+
+        _rigidbody.linearVelocity = velocity;
     }
 
 
