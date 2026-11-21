@@ -67,6 +67,7 @@ public class PlayerShooter : MonoBehaviour
             {
                 Fire();
             }
+            UIManager.Instance.UseMagazine(_gun, _guncapacity);
         }
     }
     private void OnDisable() => UnBindInputEvents();
@@ -99,7 +100,6 @@ public class PlayerShooter : MonoBehaviour
         bullet.Damage = _damage;
         _guncapacity--;
         _time = 0f;
-        UIManager.Instance.UseMagazine(_gun, _guncapacity);
     }
 
     private void FireShotGun()
@@ -171,7 +171,7 @@ public class PlayerShooter : MonoBehaviour
         Debug.Log("장전 완료");
         _isReloading = false;
         _animator.SetBool("IsReloading", false);
-        UIManager.Instance.ReloadMagazine(_spareMagazine);
+        UIManager.Instance.ChangeMagazine(_spareMagazine);
         UIManager.Instance.UseMagazine(_gun, _guncapacity);
     }
     

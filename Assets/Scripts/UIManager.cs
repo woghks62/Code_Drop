@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _enemyCountText;
     [SerializeField] private Image _checkImage;
     
+    [Header("게임 종료 결과창")]
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _clearText;
     [SerializeField] private GameObject _failText;
@@ -25,19 +26,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite _leftarrowSprite;
     [SerializeField] private Sprite _rightarrowSprite;
     
-    [Header("Stratagem1")]
-    [SerializeField] private Image _stratagemIcon1;
-    [SerializeField] private Image[] _stratagemCodelists;
-    
-    [Header("Stratagem2")]
-    [SerializeField] private Image _stratagemIcon2;
-    [SerializeField] private Image[] _stratagemCodelists2;
-
     [Header("Weapon Panel")] 
     [SerializeField] private Image _currentGunIcon;
     [SerializeField] private TextMeshProUGUI _currentGunMagazine;
     [SerializeField] private Image _currentGunCapacity;
+    [SerializeField] private Image _choiceStratagemImage1;
+    [SerializeField] private Image _choiceStratagemImage2;
     
+     public Sprite UpArrowSprite => _uparrowSprite;
+     public Sprite DownArrowSprite => _downarrowSprite;
+     public Sprite LeftArrowSprite => _leftarrowSprite;
+     public Sprite RightArrowSprite => _rightarrowSprite;
 
     public Image CheckImage { get => _checkImage; set => _checkImage = value; }
     public TextMeshProUGUI EnemyCountText { get => _enemyCountText; set => _enemyCountText = value; }
@@ -52,53 +51,6 @@ public class UIManager : MonoBehaviour
     {
         _stratagemPanel.SetActive(false);
     }
-    private void StratagemImage()
-    {
-        _stratagemIcon1.sprite = GameManager.Instance.GameData.StratagemEffectList[0].Icon;
-        _stratagemIcon2.sprite = GameManager.Instance.GameData.StratagemEffectList[1].Icon;
-        
-        for (int i = 0; i < GameManager.Instance.GameData.StratagemEffectList[0].Code.Length; i++)
-        {
-            _stratagemCodelists[i].gameObject.SetActive(true);
-            if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "1")
-            {
-                _stratagemCodelists[i].sprite = _uparrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "2")
-            {
-                _stratagemCodelists[i].sprite = _downarrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "3")
-            {
-                _stratagemCodelists[i].sprite = _leftarrowSprite;
-            }
-            else if(GameManager.Instance.GameData.StratagemEffectList[0].Code[i].ToString() == "4")
-            {
-                _stratagemCodelists[i].sprite = _rightarrowSprite;
-            }
-        }
-        
-        for (int i = 0; i < GameManager.Instance.GameData.StratagemEffectList[1].Code.Length; i++)
-        {
-            _stratagemCodelists2[i].gameObject.SetActive(true);
-            if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "1")
-            {
-                _stratagemCodelists2[i].sprite = _uparrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "2")
-            {
-                _stratagemCodelists2[i].sprite = _downarrowSprite;
-            }
-            else if (GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "3")
-            {
-                _stratagemCodelists2[i].sprite = _leftarrowSprite;
-            }
-            else if(GameManager.Instance.GameData.StratagemEffectList[1].Code[i].ToString() == "4")
-            {
-                _stratagemCodelists2[i].sprite = _rightarrowSprite;
-            }
-        }
-    }
     
     private void Awake()
     {
@@ -107,21 +59,24 @@ public class UIManager : MonoBehaviour
         CheckImage.enabled = false;
     }
 
+    private float cool;
     private void Start()
     {
         GameManager.Instance.GameData.KillCount = 0;
         GameManager.Instance.GameData.UseStratagemCount = 0;
         GameManager.Instance.GameData.PlayTime = 0f;
-        StratagemImage();
         CloseStratagemPanel();
+        _choiceStratagemImage1.sprite = GameManager.Instance.GameData.StratagemEffectList[0].Icon;
+        _choiceStratagemImage2.sprite = GameManager.Instance.GameData.StratagemEffectList[1].Icon;
     }
 
     private void Update()
     {
         GameManager.Instance.GameData.PlayTime += Time.deltaTime;
     }
-
-    public void ReloadMagazine(int magazine)
+    
+    
+    public void ChangeMagazine(int magazine)
     {
         if (magazine < 0)
         {

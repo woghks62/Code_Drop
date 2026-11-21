@@ -130,7 +130,7 @@ MonoBehaviour:
   _damage: 10
   _targetLayer:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 320
 --- !u!54 &2359162423146330064
 Rigidbody:
   m_ObjectHideFlags: 0

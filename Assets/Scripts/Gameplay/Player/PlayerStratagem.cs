@@ -22,8 +22,14 @@ public class PlayerStratagem : MonoBehaviour
     [SerializeField] private Transform _handTransform;
     
     private PlayerShooter _playerShooter;
+    private bool _isInEscapeBeacon;
+    private bool _pushCodeButtonDown;
+    public bool PushCodeButtonDown => _pushCodeButtonDown;
     
-    public string Code => _code;
+    public bool IsInEscapeBeacon { get => _isInEscapeBeacon; set => _isInEscapeBeacon = value; }
+    
+
+    public string Code {get => _code; set => _code = value;}
     
     private void Awake() => _playerShooter = GetComponent<PlayerShooter>();
 
@@ -63,12 +69,18 @@ public class PlayerStratagem : MonoBehaviour
 
     private void OnStratagemButtonDown(InputAction.CallbackContext context)
     {
-        UIManager.Instance.OpenStratagemPanel();
+        if (!_isInEscapeBeacon)
+        {
+            UIManager.Instance.OpenStratagemPanel();
+        }
+
+        _pushCodeButtonDown = true;
         StratagemOpen();
     }
 
     private void OnStratagemButtonUp(InputAction.CallbackContext context)
     {
+        _pushCodeButtonDown = false;
         UIManager.Instance.CloseStratagemPanel();
         StratagemClose();
 

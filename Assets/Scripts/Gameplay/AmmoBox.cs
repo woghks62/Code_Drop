@@ -16,6 +16,7 @@ public class AmmoBox : MonoBehaviour
         }
 
         playerShooter.SpareMagazine += 3;
+        UIManager.Instance.ChangeMagazine(playerShooter.SpareMagazine);
         Destroy(gameObject);
     }
 }

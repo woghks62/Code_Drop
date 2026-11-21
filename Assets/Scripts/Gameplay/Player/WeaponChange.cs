@@ -77,7 +77,7 @@ public class WeaponChange : MonoBehaviour
     {
         _playerShooter.SetCahngeWaeponData(gun, capacity, spareMagazine);
         UIManager.Instance.ChangeGunImage(gun.Stats.GunSprite);
-        UIManager.Instance.ReloadMagazine(spareMagazine);
+        UIManager.Instance.ChangeMagazine(spareMagazine);
         UIManager.Instance.UseMagazine(gun, capacity);
     }
     
