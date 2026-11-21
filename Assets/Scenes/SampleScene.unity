@@ -21379,6 +21379,7 @@ MonoBehaviour:
   - {fileID: 2006974452}
   _coolTime: {fileID: 447511326}
   _remaining: {fileID: 1246375746}
+  _playerStratagem: {fileID: 2134337700}
 --- !u!1001 &428716575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99436,6 +99437,7 @@ MonoBehaviour:
   - {fileID: 1089578560}
   _coolTime: {fileID: 1107138488}
   _remaining: {fileID: 917543585}
+  _playerStratagem: {fileID: 2134337700}
 --- !u!1001 &1876624600
 PrefabInstance:
   m_ObjectHideFlags: 0

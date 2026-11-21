@@ -12,7 +12,9 @@ public class StratagemUI : MonoBehaviour
     [SerializeField] private Image[] _stratagemCodelists;
     [SerializeField] private TextMeshProUGUI _coolTime;
     [SerializeField] private TextMeshProUGUI _remaining;
-
+    
+    [SerializeField] private PlayerStratagem _playerStratagem;
+    
     private float time;
     private string text;
     private bool _setImage;
@@ -20,6 +22,50 @@ public class StratagemUI : MonoBehaviour
     private void Update()
     {
         StratagemPanelUI();
+        
+        string inputCode = _playerStratagem.Code;
+
+        if (inputCode == null)
+        {
+            inputCode = "";
+        }
+
+        UpdateCodeColors(inputCode);
+    }
+    
+    private void UpdateCodeColors(string inputCode)
+    {
+        string targetCode = _stratagem.StratagemEffect.Code;
+
+        bool isMatching = true;
+
+        if (inputCode.Length > targetCode.Length)
+        {
+            isMatching = false;
+        }
+        else
+        {
+            for (int i = 0; i < inputCode.Length; i++)
+            {
+                if (inputCode[i] != targetCode[i])
+                {
+                    isMatching = false;
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < _stratagemCodelists.Length; i++)
+        {
+            if (isMatching && i < inputCode.Length)
+            {
+                _stratagemCodelists[i].color = Color.green;
+            }
+            else
+            {
+                _stratagemCodelists[i].color = Color.white;
+            }
+        }
     }
 
     private void StratagemImage()
@@ -53,6 +99,7 @@ public class StratagemUI : MonoBehaviour
         if (!_setImage)
         {
             StratagemImage();   
+            _setImage = true;
         }
         
         if (_stratagemPanel == null) return;
