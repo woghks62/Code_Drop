@@ -6,9 +6,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     
-    [SerializeField] private TextMeshProUGUI _enemyCountText;
-    [SerializeField] private Image _checkImage;
-    
     [Header("게임 종료 결과창")]
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _clearText;
@@ -38,8 +35,6 @@ public class UIManager : MonoBehaviour
      public Sprite LeftArrowSprite => _leftarrowSprite;
      public Sprite RightArrowSprite => _rightarrowSprite;
 
-    public Image CheckImage { get => _checkImage; set => _checkImage = value; }
-    public TextMeshProUGUI EnemyCountText { get => _enemyCountText; set => _enemyCountText = value; }
     public GameObject GameEndPanel { get => _gameEndPanel; set => _gameEndPanel = value; }
 
     public void OpenStratagemPanel()
@@ -56,7 +51,6 @@ public class UIManager : MonoBehaviour
     {
         Instance = this;
         _gameEndPanel.SetActive(false);
-        CheckImage.enabled = false;
     }
 
     private float cool;

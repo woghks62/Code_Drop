@@ -120,6 +120,7 @@ public class EscapeBeacon : MonoBehaviour
                 _waitTimer.gameObject.SetActive(true);
                 GameManager.Instance.GameData.IsCallEscape = true;
                 StartCoroutine(EscapeRoutine());   
+                
             }
         }
     }
@@ -146,6 +147,7 @@ public class EscapeBeacon : MonoBehaviour
     private IEnumerator EscapeRoutine()
     {
         _isPlaneCall = true;
+        MissionManager.Instance.EscapeCall();
         Debug.Log("비행기 호출");
         yield return new WaitForSeconds(_escapeArriveTime);
         _waitTimer.gameObject.SetActive(false);
