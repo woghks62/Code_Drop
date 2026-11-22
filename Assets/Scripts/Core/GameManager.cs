@@ -61,4 +61,14 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public void ResetData()
+    {
+        _gameData.ChoiceGun = null;
+        _gameData.StratagemEffectList = null;
+        _gameData.KillCount = 0;
+        _gameData.UseStratagemCount = 0;
+        _gameData.PlayTime = 0;
+        _gameData.IsCallEscape = false;
+    }
 }

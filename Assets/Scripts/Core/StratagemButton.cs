@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,13 @@ public class StratagemButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _coolTimeText;
     [SerializeField] private TextMeshProUGUI _useTimeText;
     [SerializeField] private TextMeshProUGUI _waitTimeText;
+    
+    [SerializeField] private GameObject _ChoiceUI;
+
+    private void Awake()
+    {
+        _ChoiceUI.SetActive(false);
+    }
 
     private void Start()
     {
@@ -30,11 +38,14 @@ public class StratagemButton : MonoBehaviour
         {
             _loadOut.StratagemList.Add(_stratagem);
             _choice = true;
+            _ChoiceUI.SetActive(true);
         }
         else
         {
             _loadOut.StratagemList.Remove(_stratagem);
             _choice = false;
+            _ChoiceUI.SetActive(false);
         }
+        _loadOut.UpdateUI();
     }
 }
