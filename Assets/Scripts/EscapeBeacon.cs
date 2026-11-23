@@ -11,7 +11,7 @@ public class EscapeBeacon : MonoBehaviour
     
     
     [SerializeField] private int _escapeArriveTime;
-    [SerializeField] private EscapePlane _escapePlanePrefab;
+    [SerializeField] private EscapeHelicopter _escapePlanePrefab;
     [SerializeField] private int _escapeTime;
     [SerializeField] private TextMeshProUGUI _waitTimer;
     [SerializeField] private float _waitTime;
@@ -152,7 +152,7 @@ public class EscapeBeacon : MonoBehaviour
         yield return new WaitForSeconds(_escapeArriveTime);
         _waitTimer.gameObject.SetActive(false);
         
-        EscapePlane escapePlane = Instantiate(_escapePlanePrefab, new Vector3(transform.position.x,10,transform.position.z), transform.rotation);
+        EscapeHelicopter escapePlane = Instantiate(_escapePlanePrefab, new Vector3(transform.position.x,10,transform.position.z), transform.rotation);
         escapePlane.StartCoroutine(escapePlane.Escape(_escapeTime));
     }
 
