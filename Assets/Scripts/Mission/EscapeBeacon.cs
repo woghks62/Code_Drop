@@ -14,7 +14,6 @@ public class EscapeBeacon : MonoBehaviour
     [SerializeField] private int _escapeArriveTime;
     [SerializeField] private EscapeHelicopter _escapePlanePrefab;
     [SerializeField] private int _escapeTime;
-    [SerializeField] private float _waitTime;
 
     [SerializeField] private bool _isPlaneCall;
 
@@ -29,19 +28,8 @@ public class EscapeBeacon : MonoBehaviour
         SetBeaconCode();
         SetCodeImage();
         _escapeCode.SetActive(false);
-        _waitTime = _escapeArriveTime;
     }
-
-    private void Update()
-    {
-        if (!_isPlaneCall)
-        {
-            return;
-        }
-        
-        _waitTime -= Time.deltaTime;
-    }
-
+    
     [SerializeField] private int index =0;
     private void OnTriggerStay(Collider other)
     {

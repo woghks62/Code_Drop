@@ -23,13 +23,15 @@ public class EscapeHelicopter : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
+        if (other.gameObject.layer == 6 && !_isLand)
         {
+            MissionManager.Instance.Arrive();
             _isLand = true;
         }
         
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            MissionManager.Instance.Escape();
             UIManager.Instance.MissionClear();
         }
     }

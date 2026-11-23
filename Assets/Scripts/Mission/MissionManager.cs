@@ -8,15 +8,18 @@ public class MissionManager : MonoBehaviour
 {
     public static MissionManager Instance {get; private set;}
     
+    [Header("적 죽이기 미션 관련")]
     [SerializeField] private int _enemyGoalCount;
     [SerializeField] private int _currentKillCount;
     
+    [Header("탈출 비콘 호출하기 관련")]
     [SerializeField] private GameObject _escapeBeacon;
     [SerializeField] private Transform _escapeBeaconPosition;
     [SerializeField] private bool _isEscape;
     
     [SerializeField] EnemyBase[]  _enemies;
     
+    [Header("미션 UI 관련")]
     [SerializeField] private MissionUI _missionUIPrefab;
     [SerializeField] private Transform _missionGrid;
 
@@ -69,7 +72,19 @@ public class MissionManager : MonoBehaviour
         _currentMissionUI.Complete();
 
         _currentMissionUI = Instantiate(_missionUIPrefab, _missionGrid);
-        _currentMissionUI.SetMission("비행기가 도착할 때까지 버티세요");
+        _currentMissionUI.SetMission("헬기가 도착할 때까지 버티세요");
+    }
+
+    public void Arrive()
+    {
+        _currentMissionUI.Complete();
+        _currentMissionUI = Instantiate(_missionUIPrefab, _missionGrid);
+        _currentMissionUI.SetMission("헬기가 도착했습니다 탈출하세요");
+    }
+
+    public void Escape()
+    {
+        _currentMissionUI.Complete();
     }
 
     private void UpdateText()
