@@ -120,4 +120,14 @@ public class UIManager : MonoBehaviour
         _killCount.text = $"Kill : {GameManager.Instance.GameData.KillCount}";
         _useStratagemCount.text = $"Use Stratagem Count : {GameManager.Instance.GameData.UseStratagemCount}";
     }
+
+    public void MainButton()
+    {
+        GameManager.Instance.TitleScene();
+    }
+
+    public void ReStartButton()
+    {
+        GameManager.Instance.GameScene();
+    }
 }

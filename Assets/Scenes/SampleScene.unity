@@ -76959,7 +76959,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1450863432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208561697}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ReStartButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1450863432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88078,63 +88090,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4713333779746000, guid: 0d64cf1bb9d6db5458fc4331eed07b15, type: 3}
   m_PrefabInstance: {fileID: 1643143901}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1644990536
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3448058190598545811, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_Name
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.88486
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.45201
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8619514450119794048, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 09c6afccb7a895142a07332f0683a90d, type: 3}
 --- !u!1001 &1646398462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100061,7 +100016,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1858688837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1208561697}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: MainButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1858688837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111365,7 +111332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2042072323
 RectTransform:
   m_ObjectHideFlags: 0
@@ -117985,7 +117952,6 @@ SceneRoots:
   - {fileID: 1089656521}
   - {fileID: 832575519}
   - {fileID: 1385693140}
-  - {fileID: 1644990536}
   - {fileID: 735716989}
   - {fileID: 2134337693}
   - {fileID: 1968467485}

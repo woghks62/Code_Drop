@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     // 타이틀로 돌아가기
     public void TitleScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
     
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void GameScene()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(2);
     }
 

@@ -117,9 +117,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void FireSniper()
     {
-        Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread);
-        Vector3 spread = spredDirection + _firePoint.position;
-        Bullet bullet = Instantiate(_sniperbulletPrefab, spread, _firePoint.rotation);
+        Bullet bullet = Instantiate(_sniperbulletPrefab, _firePoint.position, _firePoint.rotation);
         bullet.Damage = _damage;
         _guncapacity--;
         _time = 0f;
