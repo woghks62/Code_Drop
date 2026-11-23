@@ -10,11 +10,10 @@ public class EscapeBeacon : MonoBehaviour
     [SerializeField] private string _escapeBeaconCode;
     
     
+    [SerializeField] private CallHelicopterUI _callHelicopterUI;
     [SerializeField] private int _escapeArriveTime;
-    [SerializeField] private EscapePlane _escapePlanePrefab;
+    [SerializeField] private EscapeHelicopter _escapePlanePrefab;
     [SerializeField] private int _escapeTime;
-    [SerializeField] private TextMeshProUGUI _waitTimer;
-    [SerializeField] private float _waitTime;
 
     [SerializeField] private bool _isPlaneCall;
 
@@ -26,24 +25,11 @@ public class EscapeBeacon : MonoBehaviour
     private void Start()
     {
         _escapeLight.SetActive(false);
-        _waitTimer.gameObject.SetActive(false);
         SetBeaconCode();
         SetCodeImage();
         _escapeCode.SetActive(false);
-        _waitTime = _escapeArriveTime;
     }
-
-    private void Update()
-    {
-        if (!_isPlaneCall)
-        {
-            return;
-        }
-        
-        _waitTime -= Time.deltaTime;
-        _waitTimer.text = _waitTime.ToString("0");
-    }
-
+    
     [SerializeField] private int index =0;
     private void OnTriggerStay(Collider other)
     {
@@ -117,7 +103,6 @@ public class EscapeBeacon : MonoBehaviour
                 _meshRenderer.enabled = false;
                 _escapeCode.SetActive(false);
                 _escapeLight.SetActive(true);
-                _waitTimer.gameObject.SetActive(true);
                 GameManager.Instance.GameData.IsCallEscape = true;
                 StartCoroutine(EscapeRoutine());   
                 
@@ -149,10 +134,13 @@ public class EscapeBeacon : MonoBehaviour
         _isPlaneCall = true;
         MissionManager.Instance.EscapeCall();
         Debug.Log("비행기 호출");
-        yield return new WaitForSeconds(_escapeArriveTime);
-        _waitTimer.gameObject.SetActive(false);
+        CallHelicopterUI callHelicopterUI = Instantiate(_callHelicopterUI);
+        callHelicopterUI.ArriveTime =  _escapeArriveTime;
+        callHelicopterUI.transform.SetParent(UIManager.Instance.CallPanelParent);
         
-        EscapePlane escapePlane = Instantiate(_escapePlanePrefab, new Vector3(transform.position.x,10,transform.position.z), transform.rotation);
+        yield return new WaitForSeconds(_escapeArriveTime);
+        
+        EscapeHelicopter escapePlane = Instantiate(_escapePlanePrefab, new Vector3(transform.position.x,10,transform.position.z), transform.rotation);
         escapePlane.StartCoroutine(escapePlane.Escape(_escapeTime));
     }
 

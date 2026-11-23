@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     
+    [SerializeField] private Transform _callPanelParent;
+    public Transform CallPanelParent => _callPanelParent;
+    
     [Header("게임 종료 결과창")]
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _clearText;
@@ -119,5 +122,15 @@ public class UIManager : MonoBehaviour
         _playTime.text = $"Play Time : {string.Format("{0:00}:{1:00}", minutes, seconds)}";
         _killCount.text = $"Kill : {GameManager.Instance.GameData.KillCount}";
         _useStratagemCount.text = $"Use Stratagem Count : {GameManager.Instance.GameData.UseStratagemCount}";
+    }
+
+    public void MainButton()
+    {
+        GameManager.Instance.TitleScene();
+    }
+
+    public void ReStartButton()
+    {
+        GameManager.Instance.GameScene();
     }
 }

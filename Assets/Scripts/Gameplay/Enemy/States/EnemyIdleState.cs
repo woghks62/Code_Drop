@@ -11,7 +11,7 @@ public class EnemyIdleState : IEnemyState
     
     public void Enter()
     {
-        Debug.Log("Idle 진입");
+        //Debug.Log("Idle 진입");
     }
 
     public void Execute()
@@ -21,6 +21,6 @@ public class EnemyIdleState : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("Idle 종료");
+        //Debug.Log("Idle 종료");
     }
 }
