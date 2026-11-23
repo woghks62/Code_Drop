@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
     
+    [SerializeField] private Transform _callPanelParent;
+    public Transform CallPanelParent => _callPanelParent;
+    
     [Header("게임 종료 결과창")]
     [SerializeField] private GameObject _gameEndPanel;
     [SerializeField] private GameObject _clearText;

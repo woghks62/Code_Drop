@@ -64104,6 +64104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb05d53414e6e4742af31691c18a98f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  _callPanelParent: {fileID: 1710006532}
   _gameEndPanel: {fileID: 2042072322}
   _clearText: {fileID: 39963244}
   _failText: {fileID: 1163394428}
@@ -91202,7 +91203,7 @@ GameObject:
   - component: {fileID: 1710006532}
   - component: {fileID: 1710006533}
   m_Layer: 5
-  m_Name: CallStratagemPanel
+  m_Name: CallPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
