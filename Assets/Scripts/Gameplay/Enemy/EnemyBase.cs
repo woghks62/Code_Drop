@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
+    [SerializeField] private float _patrolRadius = 10f;
+    
     [SerializeField] private Animator _animator;
     public Animator Animator => _animator;
     
@@ -65,8 +67,10 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         Init();
         CacheComponents();
-        EnemyStateMachine.Initialize(EnemyIdleState);
         _agent = GetComponent<NavMeshAgent>();
+        SetRandomPatrolPoints();
+        EnemyStateMachine.Initialize(EnemyIdleState);
+        
     }
     
     public void SetTarget(GameObject target)
@@ -116,6 +120,35 @@ public class EnemyBase : MonoBehaviour, IDamageable
             EnemyStateMachine.ChangeState(EnemyPatrolState);
         }
     }
+    
+    private void SetRandomPatrolPoints()
+    {
+        Vector3 spawnPosition = transform.position;
+        NavMeshPath path = new NavMeshPath();
+
+        foreach (Transform patrolPoint in Patroltransfom)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                Vector2 random = UnityEngine.Random.insideUnitCircle * _patrolRadius;
+
+                Vector3 randomPosition = spawnPosition + new Vector3(random.x, 0f, random.y);
+
+                if (NavMesh.SamplePosition(randomPosition, out NavMeshHit hit, 2f, _agent.areaMask))
+                {
+                    if (_agent.CalculatePath(hit.position, path))
+                    {
+                        if (path.status == NavMeshPathStatus.PathComplete)
+                        {
+                            patrolPoint.position = hit.position;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     private void Init()
     {
