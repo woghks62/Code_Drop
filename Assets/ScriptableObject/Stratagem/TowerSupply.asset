@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95f899fc9d4a6704eae7042466f64305, type: 3}
+  m_Name: TowerSupply
+  m_EditorClassIdentifier: Assembly-CSharp::Tower
+  _name: Tower
+  _code: 1234
+  _cooldown: 0
+  _useLimit: 3
+  _waitTime: 30
+  _icon: {fileID: 21300000, guid: 3effd18a766155c4ea25b95bac11714c, type: 3}
+  _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
+  _effect: {fileID: 0}
+  _beaconPrefabs: {fileID: 6328792334216087073, guid: cddef45759cdda9489f1e75c91160780, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
+  _tower: {fileID: 1593354002454851231, guid: 0940f7fc400303647b86dd3487eb30bb, type: 3}

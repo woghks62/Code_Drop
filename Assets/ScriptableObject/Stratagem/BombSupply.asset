@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f7511b793b73042a78ec9865c14778, type: 3}
+  m_Name: BombSupply
+  m_EditorClassIdentifier: Assembly-CSharp::Bomb
+  _name: Bomb
+  _code: 1324
+  _cooldown: 0
+  _useLimit: 2
+  _waitTime: 15
+  _icon: {fileID: 21300000, guid: bdf8ba2744ce4bc45bb7ed451a35bf94, type: 3}
+  _beaconmaterial: {fileID: 2100000, guid: 1a2063514925a5e47bd1e4391908aa80, type: 2}
+  _effect: {fileID: 0}
+  _beaconPrefabs: {fileID: 6902954657262378711, guid: 05126bdff72065e49a81cd2ea7bc2fd4, type: 3}
+  _dropObject: {fileID: 1365852287255147758, guid: 56af903f4a0c7f947b8a8295d4fd9b0b, type: 3}
+  _bomb: {fileID: 8151323971514063974, guid: bbb5173688503ff4fb91711f0be30bf9, type: 3}
+  _bombEffect: {fileID: 9147178612028964860, guid: ad15d3291b132094c8cc0dd602000d57, type: 3}

@@ -77,3 +77,8 @@ crashlytics-build.properties
 # Imported Assets
 /Assets/Imports/
 /Assets/Imports.meta
+
+# JetBrains Rider
+.idea/
+*.DotSettings.user
+*.sln.iml

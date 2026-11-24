@@ -1,0 +1,5 @@
+아이디,이름,최대체력,이동속도,각도 범위,반지름,공격 속도,공격 데미지,공격 사거리,투사체 속도
+id,Name,MaxHealth,MoveSpeed,AngleRange,Radius,FramingInterval,Damage,AttackRange,ProjectileSpeed
+int,string,int,float,int,float,float,int,float,float
+1,MeleeEnemy,180,3.5,140,6,1,20,1.5,0
+2,RangeEnemy,100,2.5,160,10,1.5,10,8,10

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd50937c059d0d4b87e770d0f83d9a3, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: Assembly-CSharp::GameData
+  _choiceGun: {fileID: 5302275974808794781, guid: d70f7a2dd1e7de946897e15d401bd0be, type: 3}
+  _pistol: {fileID: 126616176226410146, guid: c4f342a3106da71408f8220626fd5d55, type: 3}
+  _stratagemEffectlists:
+  - {fileID: 11400000, guid: 41c05457792399c4aac9c1278816d0cc, type: 2}
+  - {fileID: 11400000, guid: 9d84f8d403b21df4ca240580b7a1298f, type: 2}
+  _playTime: 14.354564
+  _killCount: 0
+  _useStratagemCount: 1
+  _isCallEscape: 0
