@@ -6,4 +6,8 @@ public class TitleScene : MonoBehaviour
     {
         GameManager.Instance.LoadOutScene();
     }
+    public void QuitButton()
+    {
+        GameManager.Instance.QuitGame();
+    }
 }
