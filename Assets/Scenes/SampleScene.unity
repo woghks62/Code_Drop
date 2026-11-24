@@ -64133,7 +64133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9865201a6eceaff4dab43658a74e8dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissonManager
-  _enemyGoalCount: 1
+  _enemyGoalCount: 10
   _currentKillCount: 0
   _escapeBeacon: {fileID: 3183532463218724055, guid: 5b9a3804f4176d342896c7d6e1a8130b, type: 3}
   _escapeBeaconPosition: {fileID: 234054394}
