@@ -1,8 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEditor;  // OnDrawGizmos
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -86,7 +86,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
             EnemyStateMachine.ChangeState(EnemyDeadState);
             GameManager.Instance.GameData.KillCount++;
             MissionManager.Instance.KillEnemy();
+            StartCoroutine(DeleteRoutine());
         }
+    }
+
+    private IEnumerator DeleteRoutine()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
     
     public void OnTriggerEnter(Collider other)
@@ -133,16 +140,5 @@ public class EnemyBase : MonoBehaviour, IDamageable
         EnemyPatrolState = new EnemyPatrolState(this);
         EnemyDeadState = new EnemyDeadState(this);
         _animator = GetComponent<Animator>();
-    }
-    
-    // ------------------------------------ 에디터 확인용
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
-    private void OnDrawGizmos()
-    {
-        Handles.color = SeeTarget ? _red : _blue;
-        // DrawSolidArc(시작점, 노멀벡터(법선벡터), 그려줄 방향 벡터, 각도, 반지름)
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, AngleRange / 2, Radius);
-        Handles.DrawSolidArc(transform.position, Vector3.up, transform.forward, -AngleRange / 2, Radius);
     }
 }
