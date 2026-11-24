@@ -82,11 +82,11 @@ public class EnemyBase : MonoBehaviour, IDamageable
         _currentHealth = _currentHealth - damage < 0 ? 0 : _currentHealth - damage;
         if (_currentHealth <= 0)
         {
-            _isDead = true;
             EnemyStateMachine.ChangeState(EnemyDeadState);
             GameManager.Instance.GameData.KillCount++;
             MissionManager.Instance.KillEnemy();
             StartCoroutine(DeleteRoutine());
+            _isDead = true;
         }
     }
 

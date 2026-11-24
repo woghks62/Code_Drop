@@ -28,5 +28,7 @@ public class RangeChaseState : IEnemyState
     {
         Debug.Log("RangeChaseState 종료");
         _rangeEnemy.Animator.SetBool("IsChasing", false);
+        
+        _rangeEnemy.Agent.ResetPath();
     }
 }

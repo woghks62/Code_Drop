@@ -6,6 +6,12 @@ public class EnemyStateMachine : MonoBehaviour
     private IEnemyState _currentState;
     
     public IEnemyState CurrentState => _currentState;
+    private EnemyBase _enemybase;
+
+    private void Awake()
+    {
+        _enemybase = GetComponent<EnemyBase>();
+    }
     
     public void Initialize(IEnemyState startState)
     { 
@@ -16,6 +22,7 @@ public class EnemyStateMachine : MonoBehaviour
     public void ChangeState(IEnemyState newState)
     {
         if(_currentState == newState) return;
+        if (_enemybase.IsDead) return;
         
         _currentState.Exit();
         _currentState = newState;
