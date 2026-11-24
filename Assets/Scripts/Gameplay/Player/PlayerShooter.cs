@@ -106,9 +106,16 @@ public class PlayerShooter : MonoBehaviour
     {
         for (int i = 0; i < SHOTGUN_BULLET_AMOUNT; i++)
         {
-            Vector3 spredDirection = GetSpredDirection((_firePoint.position - transform.position).normalized, _bulletSpread * 30);
-            Vector3 spread = spredDirection + _firePoint.position;
-            Bullet bullet = Instantiate(_bulletPrefab, spread, _firePoint.rotation);
+            float spreadAngle = Random.Range(-_bulletSpread, _bulletSpread);
+
+            Quaternion spreadRotation =
+                Quaternion.Euler(0f, spreadAngle, 0f) * _firePoint.rotation;
+
+            Bullet bullet = Instantiate(
+                _bulletPrefab,
+                _firePoint.position,
+                spreadRotation
+            );
             bullet.Damage = _damage;    
         }
         _guncapacity--;
@@ -123,15 +130,6 @@ public class PlayerShooter : MonoBehaviour
         _time = 0f;
     }
 
-    private Vector3 GetSpredDirection(Vector3 forwardDirection, float spreadAngle)
-    {
-        float spreadX = Random.Range(-spreadAngle, spreadAngle);
-        float spreadY = Random.Range(-spreadAngle, spreadAngle);
-
-        Vector3 spreadDirection = Quaternion.Euler(spreadX, spreadY, 0) * forwardDirection;
-        return spreadDirection;
-    }
-    
     private void OnMouseLeftButtonDown(InputAction.CallbackContext context)
     {
         _isShooting = true;
