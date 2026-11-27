@@ -63,9 +63,13 @@ public class PlayerShooter : MonoBehaviour
             {
                 FireSniper();
             }
+            else if (_currentGunName == "Rifle" && _time > _framingInterval)
+            {
+                Fire(SFXType.Rifle);
+            }
             else if (_time > _framingInterval)
             {
-                Fire();
+                Fire(SFXType.Pistol);
             }
             UIManager.Instance.UseMagazine(_gun, _guncapacity);
         }
@@ -93,11 +97,12 @@ public class PlayerShooter : MonoBehaviour
         _bulletSpread = gun.Stats.BulletSpread;
     }
     
-    private void Fire()
+    private void Fire(SFXType sfxType)
     {
         _animator.SetBool("IsFiring", true);
         Bullet bullet = Instantiate(_bulletPrefab, _firePoint.position, _firePoint.rotation);
         bullet.Damage = _damage;
+        SoundManager.Instance.SFXPlay(sfxType);
         _guncapacity--;
         _time = 0f;
     }
@@ -118,6 +123,7 @@ public class PlayerShooter : MonoBehaviour
             );
             bullet.Damage = _damage;    
         }
+        SoundManager.Instance.SFXPlay(SFXType.Shotgun);
         _guncapacity--;
         _time = 0f;
     }
@@ -126,6 +132,7 @@ public class PlayerShooter : MonoBehaviour
     {
         Bullet bullet = Instantiate(_sniperbulletPrefab, _firePoint.position, _firePoint.rotation);
         bullet.Damage = _damage;
+        SoundManager.Instance.SFXPlay(SFXType.Sniper);
         _guncapacity--;
         _time = 0f;
     }
