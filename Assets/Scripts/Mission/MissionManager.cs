@@ -29,6 +29,7 @@ public class MissionManager : MonoBehaviour
     
     private void Start()
     {
+        SoundManager.Instance?.BGMPlay(BGMType.Game);
         GameManager.Instance.GameData.IsCallEscape = false;
         
         _currentMissionUI = Instantiate(_missionUIPrefab, _missionGrid);

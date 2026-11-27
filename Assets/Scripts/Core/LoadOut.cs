@@ -50,6 +50,11 @@ public class LoadOut : MonoBehaviour
         _choiceCountText.gameObject.SetActive(false);
     }
 
+    private void Start()
+    {
+        SoundManager.Instance?.BGMPlay(BGMType.LoadOut);
+    }
+
     public void UpdateUI()
     {
         _choiceCountText.text = $"{_stratagemlists.Count} / 2";

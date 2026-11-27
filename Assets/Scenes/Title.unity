@@ -1177,7 +1177,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   BGM: {fileID: 1574991792}
   SFX: {fileID: 1574991791}
-  BGMArr: []
+  BGMArr:
+  - {fileID: 8300000, guid: 902e7be9feb5c0d642edd9a473bb484b, type: 3}
+  - {fileID: 8300000, guid: d8d3c7d3e72c53161208088a6039093c, type: 3}
+  - {fileID: 8300000, guid: a518bdb1166a5ae18da5fa8e6c9bb916, type: 3}
   SFXArr:
   - {fileID: 0}
   - {fileID: 8300000, guid: c9ab659a3085f4a6fadf831af8d4dcc9, type: 3}
@@ -1191,10 +1194,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 3233ce03ebb6942f48f6df3640b5ca57, type: 3}
+  - {fileID: 8300000, guid: 32febbc58e1554eeb820c1c85432be27, type: 3}
+  - {fileID: 8300000, guid: 3c154a94f2d8b4e598ce74598b9b1835, type: 3}
+  - {fileID: 8300000, guid: 14fba1df39b9e4ca28123afc4f2d4870, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

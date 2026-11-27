@@ -71,6 +71,7 @@ public class EscapeBeacon : MonoBehaviour
                 // 탈출 코드와 플레이어 스트라타잼 코드가 다르면
                 else
                 {
+                    SoundManager.Instance?.SFXPlay(SFXType.CodeFail);
                     // 근데 다른데 탈출코드 0번째와 인덱스번호의 틀린 코드가 같으면
                     if (_escapeBeaconCode[0] == other.GetComponent<PlayerStratagem>().Code[index])
                     {
@@ -100,6 +101,7 @@ public class EscapeBeacon : MonoBehaviour
             
             if (other.GetComponent<PlayerStratagem>().Code == _escapeBeaconCode)
             {
+                SoundManager.Instance?.SFXPlay(SFXType.CodeSuccess);
                 _meshRenderer.enabled = false;
                 _escapeCode.SetActive(false);
                 _escapeLight.SetActive(true);

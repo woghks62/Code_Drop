@@ -53,6 +53,7 @@ public class PlayerStratagem : MonoBehaviour
         _stratagemlist[index].gameObject.GetComponentInChildren<Rigidbody>().useGravity = false;
         _stratagemlist[index].gameObject.GetComponentInChildren<Rigidbody>().isKinematic = true;
         _currentStratagem.CanExecute = true;
+        SoundManager.Instance?.SFXPlay(SFXType.CodeSuccess);
     }
 
     private void DownStratagem()
@@ -93,6 +94,10 @@ public class PlayerStratagem : MonoBehaviour
                 {
                     Debug.Log("쿨타임이 안됐어요");
                     DownStratagem();
+                    if (!_isInEscapeBeacon)
+                    {
+                        SoundManager.Instance?.SFXPlay(SFXType.CodeFail);
+                    }
                     _code = null;
                     return;
                 }
@@ -129,6 +134,10 @@ public class PlayerStratagem : MonoBehaviour
 
         if (_currentStratagem == null)
         {
+            if (!_isInEscapeBeacon)
+            {
+                SoundManager.Instance?.SFXPlay(SFXType.CodeFail);
+            }
             Debug.Log("같은 코드가 없어요");
         }
         
@@ -147,6 +156,7 @@ public class PlayerStratagem : MonoBehaviour
         _currentStratagem.CoolTime = 0;
         _rigidStratagem.isKinematic = false;
         _rigidStratagem.AddForce(_handTransform.forward * 10, ForceMode.Impulse);
+        SoundManager.Instance?.SFXPlay(SFXType.BeaconThrow);
         _rigidStratagem.useGravity = true;
         _playerShooter.HasStratagem = false;
         _currentStratagem = null;
@@ -156,21 +166,25 @@ public class PlayerStratagem : MonoBehaviour
     private void OnUpButtonDown(InputAction.CallbackContext context)
     {
         _code += 1;
+        SoundManager.Instance?.SFXPlay(SFXType.CodeInput);
     }
 
     private void OnDownButtonUp(InputAction.CallbackContext context)
     {
         _code += 2;
+        SoundManager.Instance?.SFXPlay(SFXType.CodeInput);
     }
 
     private void OnLeftButtonDown(InputAction.CallbackContext context)
     {
         _code += 3;
+        SoundManager.Instance?.SFXPlay(SFXType.CodeInput);
     }
 
     private void OnRightButtonDown(InputAction.CallbackContext context)
     {
         _code += 4;
+        SoundManager.Instance?.SFXPlay(SFXType.CodeInput);
     }
 
     private void StratagemOpen()
